@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RSAF_ProdModelStoreContainer" CdmEntityContainer="RsafDbContext">
+    <EntitySetMapping Name="RSAF_SITE">
+      <EntityTypeMapping TypeName="IsTypeOf(RSAFModel.RSAF_SITE)">
+        <MappingFragment StoreEntitySet="RSAF_SITE">
+          <ScalarProperty Name="SITE_CODE" ColumnName="SITE_CODE" />
+          <ScalarProperty Name="SITE" ColumnName="SITE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSAF_TYPE">
+      <EntityTypeMapping TypeName="IsTypeOf(RSAFModel.RSAF_TYPE)">
+        <MappingFragment StoreEntitySet="RSAF_TYPE">
+          <ScalarProperty Name="TYPE_CODE" ColumnName="TYPE_CODE" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSAF_ARCHIVE">
+      <EntityTypeMapping TypeName="RSAFModel.RSAF_ARCHIVE">
+        <MappingFragment StoreEntitySet="RSAF_ARCHIVE">
+          <ScalarProperty Name="PREVIOUS_PROMISE_DATE" ColumnName="PREVIOUS_PROMISE_DATE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="ACC_DM" ColumnName="ACC_DM" />
+          <ScalarProperty Name="RCD" ColumnName="RCD" />
+          <ScalarProperty Name="PROMDATE" ColumnName="PROMDATE" />
+          <ScalarProperty Name="REF" ColumnName="REF" />
+          <ScalarProperty Name="ANSPSIDT" ColumnName="ANSPSIDT" />
+          <ScalarProperty Name="INTOROS" ColumnName="INTOROS" />
+          <ScalarProperty Name="RECDPART" ColumnName="RECDPART" />
+          <ScalarProperty Name="DESPARDT" ColumnName="DESPARDT" />
+          <ScalarProperty Name="SCRPREF" ColumnName="SCRPREF" />
+          <ScalarProperty Name="ANSRVREF" ColumnName="ANSRVREF" />
+          <ScalarProperty Name="ANSPSI" ColumnName="ANSPSI" />
+          <ScalarProperty Name="RVREF" ColumnName="RVREF" />
+          <ScalarProperty Name="DESPPART" ColumnName="DESPPART" />
+          <ScalarProperty Name="RECDOC" ColumnName="RECDOC" />
+          <ScalarProperty Name="X" ColumnName="X" />
+          <ScalarProperty Name="DETAIL_ID" ColumnName="DETAIL_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSAF_DETAIL">
+      <EntityTypeMapping TypeName="RSAFModel.RSAF_DETAIL">
+        <MappingFragment StoreEntitySet="RSAF_DETAIL">
+          <ScalarProperty Name="FLEX4" ColumnName="FLEX4" />
+          <ScalarProperty Name="FLEX3" ColumnName="FLEX3" />
+          <ScalarProperty Name="FLEX2" ColumnName="FLEX2" />
+          <ScalarProperty Name="FLEX1" ColumnName="FLEX1" />
+          <ScalarProperty Name="AWB_DETAILS" ColumnName="AWB_DETAILS" />
+          <ScalarProperty Name="SAP_SES" ColumnName="SAP_SES" />
+          <ScalarProperty Name="QUALITY_NO" ColumnName="QUALITY_NO" />
+          <ScalarProperty Name="RR_PO" ColumnName="RR_PO" />
+          <ScalarProperty Name="PO_REQ" ColumnName="PO_REQ" />
+          <ScalarProperty Name="VENDOR_LABOR_COST" ColumnName="VENDOR_LABOR_COST" />
+          <ScalarProperty Name="VENDOR_MATERIAL_COST" ColumnName="VENDOR_MATERIAL_COST" />
+          <ScalarProperty Name="VENDOR_COFC" ColumnName="VENDOR_COFC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="SALES_DOCUMENT" ColumnName="SALES_DOCUMENT" />
+          <ScalarProperty Name="INVOICE_NO" ColumnName="INVOICE_NO" />
+          <ScalarProperty Name="FLEX_DATE" ColumnName="FLEX_DATE" />
+          <ScalarProperty Name="PAEURO" ColumnName="PAEURO" />
+          <ScalarProperty Name="EURO" ColumnName="EURO" />
+          <ScalarProperty Name="ACC_STG" ColumnName="ACC_STG" />
+          <ScalarProperty Name="MODULE_TEXT" ColumnName="MODULE_TEXT" />
+          <ScalarProperty Name="EX_ENGINE" ColumnName="EX_ENGINE" />
+          <ScalarProperty Name="RFR" ColumnName="RFR" />
+          <ScalarProperty Name="HOURS_REP" ColumnName="HOURS_REP" />
+          <ScalarProperty Name="HOURS_NEW" ColumnName="HOURS_NEW" />
+          <ScalarProperty Name="ENG_MARK" ColumnName="ENG_MARK" />
+          <ScalarProperty Name="INVOICE_REQUESTED" ColumnName="INVOICE_REQUESTED" />
+          <ScalarProperty Name="INVOICE_PAID" ColumnName="INVOICE_PAID" />
+          <ScalarProperty Name="QUOTE_REF_DATE" ColumnName="QUOTE_REF_DATE" />
+          <ScalarProperty Name="QUOTE_REF" ColumnName="QUOTE_REF" />
+          <ScalarProperty Name="CTRT_DATE" ColumnName="CTRT_DATE" />
+          <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+          <ScalarProperty Name="RCP" ColumnName="RCP" />
+          <ScalarProperty Name="POIC" ColumnName="POIC" />
+          <ScalarProperty Name="PROMISE" ColumnName="PROMISE" />
+          <ScalarProperty Name="OUTPART" ColumnName="OUTPART" />
+          <ScalarProperty Name="BAESENT" ColumnName="BAESENT" />
+          <ScalarProperty Name="BAESER" ColumnName="BAESER" />
+          <ScalarProperty Name="BAEQTY" ColumnName="BAEQTY" />
+          <ScalarProperty Name="DESPDATE" ColumnName="DESPDATE" />
+          <ScalarProperty Name="PSIDATE" ColumnName="PSIDATE" />
+          <ScalarProperty Name="RECDATE" ColumnName="RECDATE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="QTYSCRP" ColumnName="QTYSCRP" />
+          <ScalarProperty Name="DESPTOBA" ColumnName="DESPTOBA" />
+          <ScalarProperty Name="PSIREF" ColumnName="PSIREF" />
+          <ScalarProperty Name="OONUM" ColumnName="OONUM" />
+          <ScalarProperty Name="WARR" ColumnName="WARR" />
+          <ScalarProperty Name="QTYREC" ColumnName="QTYREC" />
+          <ScalarProperty Name="SERIAL" ColumnName="SERIAL" />
+          <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+          <ScalarProperty Name="MDR" ColumnName="MDR" />
+          <ScalarProperty Name="POITEM" ColumnName="POITEM" />
+          <ScalarProperty Name="DETAIL_ID" ColumnName="DETAIL_ID" />
+          <ScalarProperty Name="MASTER_ID" ColumnName="MASTER_ID" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSAF_DETAIL_HIST">
+      <EntityTypeMapping TypeName="RSAFModel.RSAF_DETAIL_HIST">
+        <MappingFragment StoreEntitySet="RSAF_DETAIL_HIST">
+          <ScalarProperty Name="FLEX4" ColumnName="FLEX4" />
+          <ScalarProperty Name="FLEX3" ColumnName="FLEX3" />
+          <ScalarProperty Name="FLEX2" ColumnName="FLEX2" />
+          <ScalarProperty Name="FLEX1" ColumnName="FLEX1" />
+          <ScalarProperty Name="AWB_DETAILS" ColumnName="AWB_DETAILS" />
+          <ScalarProperty Name="SAP_SES" ColumnName="SAP_SES" />
+          <ScalarProperty Name="QUALITY_NO" ColumnName="QUALITY_NO" />
+          <ScalarProperty Name="RR_PO" ColumnName="RR_PO" />
+          <ScalarProperty Name="PO_REQ" ColumnName="PO_REQ" />
+          <ScalarProperty Name="VENDOR_LABOR_COST" ColumnName="VENDOR_LABOR_COST" />
+          <ScalarProperty Name="VENDOR_MATERIAL_COST" ColumnName="VENDOR_MATERIAL_COST" />
+          <ScalarProperty Name="VENDOR_COFC" ColumnName="VENDOR_COFC" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="SALES_DOCUMENT" ColumnName="SALES_DOCUMENT" />
+          <ScalarProperty Name="INVOICE_NO" ColumnName="INVOICE_NO" />
+          <ScalarProperty Name="FLEX_DATE" ColumnName="FLEX_DATE" />
+          <ScalarProperty Name="PAEURO" ColumnName="PAEURO" />
+          <ScalarProperty Name="EURO" ColumnName="EURO" />
+          <ScalarProperty Name="ACC_STG" ColumnName="ACC_STG" />
+          <ScalarProperty Name="MODULE_TEXT" ColumnName="MODULE_TEXT" />
+          <ScalarProperty Name="EX_ENGINE" ColumnName="EX_ENGINE" />
+          <ScalarProperty Name="RFR" ColumnName="RFR" />
+          <ScalarProperty Name="HOURS_REP" ColumnName="HOURS_REP" />
+          <ScalarProperty Name="HOURS_NEW" ColumnName="HOURS_NEW" />
+          <ScalarProperty Name="ENG_MARK" ColumnName="ENG_MARK" />
+          <ScalarProperty Name="INVOICE_REQUESTED" ColumnName="INVOICE_REQUESTED" />
+          <ScalarProperty Name="INVOICE_PAID" ColumnName="INVOICE_PAID" />
+          <ScalarProperty Name="QUOTE_REF_DATE" ColumnName="QUOTE_REF_DATE" />
+          <ScalarProperty Name="QUOTE_REF" ColumnName="QUOTE_REF" />
+          <ScalarProperty Name="CTRT_DATE" ColumnName="CTRT_DATE" />
+          <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+          <ScalarProperty Name="RCP" ColumnName="RCP" />
+          <ScalarProperty Name="POIC" ColumnName="POIC" />
+          <ScalarProperty Name="PROMISE" ColumnName="PROMISE" />
+          <ScalarProperty Name="OUTPART" ColumnName="OUTPART" />
+          <ScalarProperty Name="BAESENT" ColumnName="BAESENT" />
+          <ScalarProperty Name="BAESER" ColumnName="BAESER" />
+          <ScalarProperty Name="BAEQTY" ColumnName="BAEQTY" />
+          <ScalarProperty Name="DESPDATE" ColumnName="DESPDATE" />
+          <ScalarProperty Name="PSIDATE" ColumnName="PSIDATE" />
+          <ScalarProperty Name="RECDATE" ColumnName="RECDATE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="QTYSCRP" ColumnName="QTYSCRP" />
+          <ScalarProperty Name="DESPTOBA" ColumnName="DESPTOBA" />
+          <ScalarProperty Name="PSIREF" ColumnName="PSIREF" />
+          <ScalarProperty Name="OONUM" ColumnName="OONUM" />
+          <ScalarProperty Name="WARR" ColumnName="WARR" />
+          <ScalarProperty Name="QTYREC" ColumnName="QTYREC" />
+          <ScalarProperty Name="SERIAL" ColumnName="SERIAL" />
+          <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+          <ScalarProperty Name="MDR" ColumnName="MDR" />
+          <ScalarProperty Name="POITEM" ColumnName="POITEM" />
+          <ScalarProperty Name="DETAIL_ID" ColumnName="DETAIL_ID" />
+          <ScalarProperty Name="MASTER_ID" ColumnName="MASTER_ID" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSAF_MASTER">
+      <EntityTypeMapping TypeName="RSAFModel.RSAF_MASTER">
+        <MappingFragment StoreEntitySet="RSAF_MASTER">
+          <ScalarProperty Name="ROID_NO" ColumnName="ROID_NO" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="SITE" ColumnName="SITE" />
+          <ScalarProperty Name="BAEPART" ColumnName="BAEPART" />
+          <ScalarProperty Name="BAEPO" ColumnName="BAEPO" />
+          <ScalarProperty Name="MASTER_ID" ColumnName="MASTER_ID" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSAF_MASTER_HIST">
+      <EntityTypeMapping TypeName="RSAFModel.RSAF_MASTER_HIST">
+        <MappingFragment StoreEntitySet="RSAF_MASTER_HIST">
+          <ScalarProperty Name="ROID_NO" ColumnName="ROID_NO" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="MDR" ColumnName="MDR" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="SITE" ColumnName="SITE" />
+          <ScalarProperty Name="BAEPART" ColumnName="BAEPART" />
+          <ScalarProperty Name="BAEPO" ColumnName="BAEPO" />
+          <ScalarProperty Name="MASTER_ID" ColumnName="MASTER_ID" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

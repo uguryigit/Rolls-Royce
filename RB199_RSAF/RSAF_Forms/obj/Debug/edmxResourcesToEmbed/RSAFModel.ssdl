@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RSAF_ProdModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="RSAF_ARCHIVE">
+    <Key>
+      <PropertyRef Name="DETAIL_ID" />
+    </Key>
+    <Property Name="DETAIL_ID" Type="bigint" Nullable="false" />
+    <Property Name="X" Type="bigint" Nullable="false" />
+    <Property Name="RECDOC" Type="nvarchar" MaxLength="24" />
+    <Property Name="DESPPART" Type="nvarchar" MaxLength="12" />
+    <Property Name="RVREF" Type="nvarchar" MaxLength="14" />
+    <Property Name="ANSPSI" Type="nvarchar" MaxLength="14" />
+    <Property Name="ANSRVREF" Type="nvarchar" MaxLength="14" />
+    <Property Name="SCRPREF" Type="nvarchar" MaxLength="16" />
+    <Property Name="DESPARDT" Type="date" />
+    <Property Name="RECDPART" Type="date" />
+    <Property Name="INTOROS" Type="date" />
+    <Property Name="ANSPSIDT" Type="date" />
+    <Property Name="REF" Type="nvarchar" MaxLength="34" />
+    <Property Name="PROMDATE" Type="date" />
+    <Property Name="RCD" Type="money" />
+    <Property Name="ACC_DM" Type="money" />
+    <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="510" />
+    <Property Name="PREVIOUS_PROMISE_DATE" Type="date" />
+  </EntityType>
+  <EntityType Name="RSAF_DETAIL">
+    <Key>
+      <PropertyRef Name="DETAIL_ID" />
+    </Key>
+    <Property Name="CREATE_DATE" Type="datetime" Nullable="false" />
+    <Property Name="UPDATE_DATE" Type="datetime" />
+    <Property Name="STATUS" Type="bit" Nullable="false" />
+    <Property Name="MASTER_ID" Type="bigint" Nullable="false" />
+    <Property Name="DETAIL_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="POITEM" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="MDR" Type="nvarchar" MaxLength="24" Nullable="false" />
+    <Property Name="PART_NO" Type="nvarchar" MaxLength="30" />
+    <Property Name="SERIAL" Type="nvarchar" MaxLength="20" />
+    <Property Name="QTYREC" Type="smallint" />
+    <Property Name="WARR" Type="bit" Nullable="false" />
+    <Property Name="OONUM" Type="nvarchar" MaxLength="30" />
+    <Property Name="PSIREF" Type="nvarchar" MaxLength="34" />
+    <Property Name="DESPTOBA" Type="nvarchar" MaxLength="16" />
+    <Property Name="QTYSCRP" Type="smallint" />
+    <Property Name="REMARKS" Type="nvarchar(max)" />
+    <Property Name="RECDATE" Type="date" />
+    <Property Name="PSIDATE" Type="date" />
+    <Property Name="DESPDATE" Type="date" />
+    <Property Name="BAEQTY" Type="smallint" />
+    <Property Name="BAESER" Type="nvarchar" MaxLength="30" />
+    <Property Name="BAESENT" Type="date" />
+    <Property Name="OUTPART" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROMISE" Type="date" />
+    <Property Name="POIC" Type="bit" />
+    <Property Name="RCP" Type="money" />
+    <Property Name="ARCHIVE" Type="bit" Nullable="false" />
+    <Property Name="CTRT_DATE" Type="date" />
+    <Property Name="QUOTE_REF" Type="nvarchar" MaxLength="50" />
+    <Property Name="QUOTE_REF_DATE" Type="date" />
+    <Property Name="INVOICE_PAID" Type="bit" Nullable="false" />
+    <Property Name="INVOICE_REQUESTED" Type="date" />
+    <Property Name="ENG_MARK" Type="int" />
+    <Property Name="HOURS_NEW" Type="int" />
+    <Property Name="HOURS_REP" Type="nvarchar" MaxLength="20" />
+    <Property Name="RFR" Type="nvarchar" MaxLength="500" />
+    <Property Name="EX_ENGINE" Type="int" />
+    <Property Name="MODULE_TEXT" Type="nvarchar" MaxLength="510" />
+    <Property Name="ACC_STG" Type="money" />
+    <Property Name="EURO" Type="money" />
+    <Property Name="PAEURO" Type="money" />
+    <Property Name="FLEX_DATE" Type="date" />
+    <Property Name="INVOICE_NO" Type="nvarchar" MaxLength="20" />
+    <Property Name="SALES_DOCUMENT" Type="bigint" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="150" />
+    <Property Name="VENDOR_COFC" Type="nvarchar" MaxLength="50" />
+    <Property Name="VENDOR_MATERIAL_COST" Type="money" />
+    <Property Name="VENDOR_LABOR_COST" Type="money" />
+    <Property Name="PO_REQ" Type="bigint" />
+    <Property Name="RR_PO" Type="bigint" />
+    <Property Name="QUALITY_NO" Type="nvarchar" MaxLength="25" />
+    <Property Name="SAP_SES" Type="bigint" />
+    <Property Name="AWB_DETAILS" Type="nvarchar" MaxLength="100" />
+    <Property Name="FLEX1" Type="nvarchar" MaxLength="255" />
+    <Property Name="FLEX2" Type="nvarchar" MaxLength="255" />
+    <Property Name="FLEX3" Type="nvarchar" MaxLength="255" />
+    <Property Name="FLEX4" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="RSAF_DETAIL_HIST">
+    <Key>
+      <PropertyRef Name="UPDATE_DATE" />
+      <PropertyRef Name="DETAIL_ID" />
+    </Key>
+    <Property Name="CREATE_DATE" Type="datetime" Nullable="false" />
+    <Property Name="UPDATE_DATE" Type="datetime" Nullable="false" />
+    <Property Name="STATUS" Type="bit" Nullable="false" />
+    <Property Name="MASTER_ID" Type="bigint" Nullable="false" />
+    <Property Name="DETAIL_ID" Type="bigint" Nullable="false" />
+    <Property Name="POITEM" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="MDR" Type="nvarchar" MaxLength="24" Nullable="false" />
+    <Property Name="PART_NO" Type="nvarchar" MaxLength="30" />
+    <Property Name="SERIAL" Type="nvarchar" MaxLength="20" />
+    <Property Name="QTYREC" Type="smallint" />
+    <Property Name="WARR" Type="bit" Nullable="false" />
+    <Property Name="OONUM" Type="nvarchar" MaxLength="30" />
+    <Property Name="PSIREF" Type="nvarchar" MaxLength="34" />
+    <Property Name="DESPTOBA" Type="nvarchar" MaxLength="16" />
+    <Property Name="QTYSCRP" Type="smallint" />
+    <Property Name="REMARKS" Type="nvarchar(max)" />
+    <Property Name="RECDATE" Type="date" />
+    <Property Name="PSIDATE" Type="date" />
+    <Property Name="DESPDATE" Type="date" />
+    <Property Name="BAEQTY" Type="smallint" />
+    <Property Name="BAESER" Type="nvarchar" MaxLength="30" />
+    <Property Name="BAESENT" Type="date" />
+    <Property Name="OUTPART" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROMISE" Type="date" />
+    <Property Name="POIC" Type="bit" />
+    <Property Name="RCP" Type="money" />
+    <Property Name="ARCHIVE" Type="bit" Nullable="false" />
+    <Property Name="CTRT_DATE" Type="date" />
+    <Property Name="QUOTE_REF" Type="nvarchar" MaxLength="50" />
+    <Property Name="QUOTE_REF_DATE" Type="date" />
+    <Property Name="INVOICE_PAID" Type="bit" Nullable="false" />
+    <Property Name="INVOICE_REQUESTED" Type="date" />
+    <Property Name="ENG_MARK" Type="int" />
+    <Property Name="HOURS_NEW" Type="int" />
+    <Property Name="HOURS_REP" Type="nvarchar" MaxLength="20" />
+    <Property Name="RFR" Type="nvarchar" MaxLength="500" />
+    <Property Name="EX_ENGINE" Type="int" />
+    <Property Name="MODULE_TEXT" Type="nvarchar" MaxLength="510" />
+    <Property Name="ACC_STG" Type="money" />
+    <Property Name="EURO" Type="money" />
+    <Property Name="PAEURO" Type="money" />
+    <Property Name="FLEX_DATE" Type="date" />
+    <Property Name="INVOICE_NO" Type="nvarchar" MaxLength="20" />
+    <Property Name="SALES_DOCUMENT" Type="bigint" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="150" />
+    <Property Name="VENDOR_COFC" Type="nvarchar" MaxLength="50" />
+    <Property Name="VENDOR_MATERIAL_COST" Type="money" />
+    <Property Name="VENDOR_LABOR_COST" Type="money" />
+    <Property Name="PO_REQ" Type="bigint" />
+    <Property Name="RR_PO" Type="bigint" />
+    <Property Name="QUALITY_NO" Type="nvarchar" MaxLength="25" />
+    <Property Name="SAP_SES" Type="bigint" />
+    <Property Name="AWB_DETAILS" Type="nvarchar" MaxLength="100" />
+    <Property Name="FLEX1" Type="nvarchar" MaxLength="255" />
+    <Property Name="FLEX2" Type="nvarchar" MaxLength="255" />
+    <Property Name="FLEX3" Type="nvarchar" MaxLength="255" />
+    <Property Name="FLEX4" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="RSAF_MASTER">
+    <Key>
+      <PropertyRef Name="MASTER_ID" />
+    </Key>
+    <Property Name="CREATE_DATE" Type="datetime" Nullable="false" />
+    <Property Name="UPDATE_DATE" Type="datetime" />
+    <Property Name="STATUS" Type="bit" Nullable="false" />
+    <Property Name="MASTER_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BAEPO" Type="nvarchar" MaxLength="24" Nullable="false" />
+    <Property Name="BAEPART" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="SITE" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="TYPE" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="510" />
+    <Property Name="ROID_NO" Type="nvarchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="RSAF_MASTER_HIST">
+    <Key>
+      <PropertyRef Name="UPDATE_DATE" />
+      <PropertyRef Name="MASTER_ID" />
+    </Key>
+    <Property Name="CREATE_DATE" Type="datetime" Nullable="false" />
+    <Property Name="UPDATE_DATE" Type="datetime" Nullable="false" />
+    <Property Name="STATUS" Type="bit" Nullable="false" />
+    <Property Name="MASTER_ID" Type="bigint" Nullable="false" />
+    <Property Name="BAEPO" Type="nvarchar" MaxLength="24" Nullable="false" />
+    <Property Name="BAEPART" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="SITE" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="TYPE" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="MDR" Type="nvarchar" MaxLength="24" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="510" />
+    <Property Name="ROID_NO" Type="nvarchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="RSAF_SITE">
+    <Key>
+      <PropertyRef Name="SITE_CODE" />
+    </Key>
+    <Property Name="SITE_CODE" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="SITE" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="RSAF_TYPE">
+    <Key>
+      <PropertyRef Name="TYPE_CODE" />
+    </Key>
+    <Property Name="TYPE_CODE" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="TYPE" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RSAF_DESCRIPTION">
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="510" />
+        </EntityType>-->
+  <Association Name="FK_RSAF_ARCHIVE_DETAIL">
+    <End Role="RSAF_DETAIL" Type="Self.RSAF_DETAIL" Multiplicity="1" />
+    <End Role="RSAF_ARCHIVE" Type="Self.RSAF_ARCHIVE" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="RSAF_DETAIL">
+        <PropertyRef Name="DETAIL_ID" />
+      </Principal>
+      <Dependent Role="RSAF_ARCHIVE">
+        <PropertyRef Name="DETAIL_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RSAF_DETAIL_HIST">
+    <End Role="RSAF_DETAIL" Type="Self.RSAF_DETAIL" Multiplicity="1" />
+    <End Role="RSAF_DETAIL_HIST" Type="Self.RSAF_DETAIL_HIST" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RSAF_DETAIL">
+        <PropertyRef Name="DETAIL_ID" />
+      </Principal>
+      <Dependent Role="RSAF_DETAIL_HIST">
+        <PropertyRef Name="DETAIL_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RSAF_DETAIL_MASTER">
+    <End Role="RSAF_MASTER" Type="Self.RSAF_MASTER" Multiplicity="1" />
+    <End Role="RSAF_DETAIL" Type="Self.RSAF_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RSAF_MASTER">
+        <PropertyRef Name="MASTER_ID" />
+      </Principal>
+      <Dependent Role="RSAF_DETAIL">
+        <PropertyRef Name="MASTER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RSAF_MASTER_HIST">
+    <End Role="RSAF_MASTER" Type="Self.RSAF_MASTER" Multiplicity="1" />
+    <End Role="RSAF_MASTER_HIST" Type="Self.RSAF_MASTER_HIST" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RSAF_MASTER">
+        <PropertyRef Name="MASTER_ID" />
+      </Principal>
+      <Dependent Role="RSAF_MASTER_HIST">
+        <PropertyRef Name="MASTER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RSAF_MASTER_SITE">
+    <End Role="RSAF_SITE" Type="Self.RSAF_SITE" Multiplicity="1" />
+    <End Role="RSAF_MASTER" Type="Self.RSAF_MASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RSAF_SITE">
+        <PropertyRef Name="SITE_CODE" />
+      </Principal>
+      <Dependent Role="RSAF_MASTER">
+        <PropertyRef Name="SITE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RSAF_MASTER_TYPE">
+    <End Role="RSAF_TYPE" Type="Self.RSAF_TYPE" Multiplicity="1" />
+    <End Role="RSAF_MASTER" Type="Self.RSAF_MASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RSAF_TYPE">
+        <PropertyRef Name="TYPE_CODE" />
+      </Principal>
+      <Dependent Role="RSAF_MASTER">
+        <PropertyRef Name="TYPE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RSAF_ProdModelStoreContainer">
+    <EntitySet Name="RSAF_ARCHIVE" EntityType="Self.RSAF_ARCHIVE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RSAF_DETAIL" EntityType="Self.RSAF_DETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RSAF_DETAIL_HIST" EntityType="Self.RSAF_DETAIL_HIST" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RSAF_MASTER" EntityType="Self.RSAF_MASTER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RSAF_MASTER_HIST" EntityType="Self.RSAF_MASTER_HIST" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RSAF_SITE" EntityType="Self.RSAF_SITE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RSAF_TYPE" EntityType="Self.RSAF_TYPE" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_RSAF_ARCHIVE_DETAIL" Association="Self.FK_RSAF_ARCHIVE_DETAIL">
+      <End Role="RSAF_DETAIL" EntitySet="RSAF_DETAIL" />
+      <End Role="RSAF_ARCHIVE" EntitySet="RSAF_ARCHIVE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RSAF_DETAIL_HIST" Association="Self.FK_RSAF_DETAIL_HIST">
+      <End Role="RSAF_DETAIL" EntitySet="RSAF_DETAIL" />
+      <End Role="RSAF_DETAIL_HIST" EntitySet="RSAF_DETAIL_HIST" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RSAF_DETAIL_MASTER" Association="Self.FK_RSAF_DETAIL_MASTER">
+      <End Role="RSAF_MASTER" EntitySet="RSAF_MASTER" />
+      <End Role="RSAF_DETAIL" EntitySet="RSAF_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RSAF_MASTER_HIST" Association="Self.FK_RSAF_MASTER_HIST">
+      <End Role="RSAF_MASTER" EntitySet="RSAF_MASTER" />
+      <End Role="RSAF_MASTER_HIST" EntitySet="RSAF_MASTER_HIST" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RSAF_MASTER_SITE" Association="Self.FK_RSAF_MASTER_SITE">
+      <End Role="RSAF_SITE" EntitySet="RSAF_SITE" />
+      <End Role="RSAF_MASTER" EntitySet="RSAF_MASTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RSAF_MASTER_TYPE" Association="Self.FK_RSAF_MASTER_TYPE">
+      <End Role="RSAF_TYPE" EntitySet="RSAF_TYPE" />
+      <End Role="RSAF_MASTER" EntitySet="RSAF_MASTER" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

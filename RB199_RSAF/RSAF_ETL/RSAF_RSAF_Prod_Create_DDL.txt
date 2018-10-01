@@ -1,0 +1,40 @@
+USE [master]
+GO
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+--Restart Database Server
+USE [master]
+GO
+--drop database [RSAF_Prod];
+create database [RSAF_Prod];
+GO
+CREATE LOGIN [RSAF_Read_Only] WITH PASSWORD=N'P@ssword01', DEFAULT_DATABASE=[RSAF_Prod], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+GO
+USE [rsaf_dev]
+GO
+CREATE USER [RSAF_Read_Only] FOR LOGIN [RSAF_Read_Only]
+GO
+USE [rsaf_dev]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [RSAF_Read_Only]
+GO
+USE [RSAF_Prod]
+GO
+CREATE USER [RSAF_RO_User] FOR LOGIN [RSAF_Read_Only]
+GO
+USE [RSAF_Prod]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [RSAF_Read_Only]
+GO
+USE [RSAF2]
+GO
+CREATE USER [RSAF_RO_User] FOR LOGIN [RSAF_Read_Only]
+GO
+USE [RSAF2]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [RSAF_Read_Only]
+GO
+CREATE LOGIN [RSAF_Read_Write] WITH PASSWORD=N'P@ssword01', DEFAULT_DATABASE=[RSAF_Prod], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+GO
+USE RSAF_Prod
+_

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ffdc0a1633b049c68ec88f63f2570c53" Name="RSAFDiagram" ZoomLevel="88">
+        <EntityTypeShape EntityType="RSAFModel.RSAF_SITE" Width="1.75" PointX="10.125" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_TYPE" Width="1.75" PointX="3.25" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_ARCHIVE" Width="2.125" PointX="3.125" PointY="4.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_DETAIL" Width="2" PointX="6.75" PointY="4.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_DETAIL_HIST" Width="1.875" PointX="10.125" PointY="4.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_MASTER" Width="1.875" PointX="6.875" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_MASTER_HIST" Width="1.875" PointX="10.125" PointY="3.25" IsExpanded="false" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_ARCHIVE_DETAIL" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_DETAIL_HIST" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_DETAIL_MASTER" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_MASTER_HIST" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_MASTER_SITE" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_MASTER_TYPE" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
