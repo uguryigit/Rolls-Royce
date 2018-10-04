@@ -22,7 +22,6 @@ namespace RSAF_Forms
         public string BAEPART { get; set; }
         public string SITE { get; set; }
         public string TYPE { get; set; }
-        public string MDR { get; set; }
         public string DESCRIPTION { get; set; }
         public string ROID_NO { get; set; }
     

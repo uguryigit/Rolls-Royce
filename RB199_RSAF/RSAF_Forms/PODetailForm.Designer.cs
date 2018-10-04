@@ -36,7 +36,7 @@ namespace RSAF_Forms
             System.Windows.Forms.Label LbDESCRIPTION;
             System.Windows.Forms.Label LbROID_NO;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PODetailForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TxBAEPART = new System.Windows.Forms.TextBox();
             this.TxBAEPO = new System.Windows.Forms.TextBox();
             this.CxSITE = new System.Windows.Forms.ComboBox();
@@ -44,7 +44,6 @@ namespace RSAF_Forms
             this.TxDESCRIPTION = new System.Windows.Forms.TextBox();
             this.BtAddNewItem = new System.Windows.Forms.Button();
             this.RsafDetailBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.RsafDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -93,6 +92,7 @@ namespace RSAF_Forms
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.TxROID_NO = new System.Windows.Forms.TextBox();
+            this.RsafDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             LbBAEPART = new System.Windows.Forms.Label();
             LbBAEPO = new System.Windows.Forms.Label();
             LbSITE = new System.Windows.Forms.Label();
@@ -101,9 +101,9 @@ namespace RSAF_Forms
             LbROID_NO = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingNavigator)).BeginInit();
             this.RsafDetailBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RsafDetailDataGridView)).BeginInit();
             this.StatusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // LbBAEPART
@@ -221,6 +221,7 @@ namespace RSAF_Forms
             this.TxDESCRIPTION.Name = "TxDESCRIPTION";
             this.TxDESCRIPTION.Size = new System.Drawing.Size(468, 23);
             this.TxDESCRIPTION.TabIndex = 10;
+            this.TxDESCRIPTION.TextChanged += new System.EventHandler(this.TxDESCRIPTION_TextChanged);
             // 
             // BtAddNewItem
             // 
@@ -262,13 +263,9 @@ namespace RSAF_Forms
             this.RsafDetailBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.RsafDetailBindingNavigator.Name = "RsafDetailBindingNavigator";
             this.RsafDetailBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.RsafDetailBindingNavigator.Size = new System.Drawing.Size(1344, 25);
+            this.RsafDetailBindingNavigator.Size = new System.Drawing.Size(1276, 25);
             this.RsafDetailBindingNavigator.TabIndex = 15;
             this.RsafDetailBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // RsafDetailBindingSource
-            // 
-            this.RsafDetailBindingSource.DataSource = typeof(RSAF_Forms.RSAF_DETAIL);
             // 
             // bindingNavigatorCountItem
             // 
@@ -391,14 +388,14 @@ namespace RSAF_Forms
             this.RsafDetailDataGridView.AllowUserToDeleteRows = false;
             this.RsafDetailDataGridView.AllowUserToResizeColumns = false;
             this.RsafDetailDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.RsafDetailDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.RsafDetailDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.RsafDetailDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.RsafDetailDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DgCREATE_DATE,
@@ -662,7 +659,7 @@ namespace RSAF_Forms
             this.toolStripStatusLabel});
             this.StatusStrip.Location = new System.Drawing.Point(0, 609);
             this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(1344, 22);
+            this.StatusStrip.Size = new System.Drawing.Size(1276, 22);
             this.StatusStrip.TabIndex = 16;
             // 
             // toolStripStatusLabel
@@ -680,12 +677,17 @@ namespace RSAF_Forms
             this.TxROID_NO.Name = "TxROID_NO";
             this.TxROID_NO.Size = new System.Drawing.Size(163, 23);
             this.TxROID_NO.TabIndex = 12;
+            this.TxROID_NO.TextChanged += new System.EventHandler(this.TxROID_NO_TextChanged);
+            // 
+            // RsafDetailBindingSource
+            // 
+            this.RsafDetailBindingSource.DataSource = typeof(RSAF_Forms.RSAF_DETAIL);
             // 
             // PODetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1344, 631);
+            this.ClientSize = new System.Drawing.Size(1276, 631);
             this.Controls.Add(LbROID_NO);
             this.Controls.Add(this.TxROID_NO);
             this.Controls.Add(this.StatusStrip);
@@ -707,14 +709,16 @@ namespace RSAF_Forms
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PODetailForm";
             this.Text = "New Purchase Order";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PODetailForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PODetailForm_FormClosed);
             this.Load += new System.EventHandler(this.NewPurchaseOrderForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingNavigator)).EndInit();
             this.RsafDetailBindingNavigator.ResumeLayout(false);
             this.RsafDetailBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RsafDetailDataGridView)).EndInit();
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -740,8 +744,8 @@ namespace RSAF_Forms
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripSaveButton;
         public System.Windows.Forms.DataGridView RsafDetailDataGridView;
-        private System.Windows.Forms.StatusStrip StatusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        public System.Windows.Forms.StatusStrip StatusStrip;
+        public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripCopyButton;
         private System.Windows.Forms.ToolStripButton toolStripPasteButton;

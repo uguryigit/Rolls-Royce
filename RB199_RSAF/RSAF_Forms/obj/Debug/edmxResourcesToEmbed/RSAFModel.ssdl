@@ -176,7 +176,6 @@
     <Property Name="BAEPART" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="SITE" Type="nvarchar" MaxLength="2" Nullable="false" />
     <Property Name="TYPE" Type="nvarchar" MaxLength="2" Nullable="false" />
-    <Property Name="MDR" Type="nvarchar" MaxLength="24" Nullable="false" />
     <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="510" />
     <Property Name="ROID_NO" Type="nvarchar" MaxLength="25" />
   </EntityType>
@@ -194,11 +193,6 @@
     <Property Name="TYPE_CODE" Type="nvarchar" MaxLength="2" Nullable="false" />
     <Property Name="TYPE" Type="nvarchar" MaxLength="20" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="RSAF_DESCRIPTION">
-          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="510" />
-        </EntityType>-->
   <Association Name="FK_RSAF_ARCHIVE_DETAIL">
     <End Role="RSAF_DETAIL" Type="Self.RSAF_DETAIL" Multiplicity="1" />
     <End Role="RSAF_ARCHIVE" Type="Self.RSAF_ARCHIVE" Multiplicity="0..1" />
@@ -211,18 +205,6 @@ warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_RSAF_DETAIL_HIST">
-    <End Role="RSAF_DETAIL" Type="Self.RSAF_DETAIL" Multiplicity="1" />
-    <End Role="RSAF_DETAIL_HIST" Type="Self.RSAF_DETAIL_HIST" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RSAF_DETAIL">
-        <PropertyRef Name="DETAIL_ID" />
-      </Principal>
-      <Dependent Role="RSAF_DETAIL_HIST">
-        <PropertyRef Name="DETAIL_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_RSAF_DETAIL_MASTER">
     <End Role="RSAF_MASTER" Type="Self.RSAF_MASTER" Multiplicity="1" />
     <End Role="RSAF_DETAIL" Type="Self.RSAF_DETAIL" Multiplicity="*" />
@@ -231,18 +213,6 @@ warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a pr
         <PropertyRef Name="MASTER_ID" />
       </Principal>
       <Dependent Role="RSAF_DETAIL">
-        <PropertyRef Name="MASTER_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_RSAF_MASTER_HIST">
-    <End Role="RSAF_MASTER" Type="Self.RSAF_MASTER" Multiplicity="1" />
-    <End Role="RSAF_MASTER_HIST" Type="Self.RSAF_MASTER_HIST" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RSAF_MASTER">
-        <PropertyRef Name="MASTER_ID" />
-      </Principal>
-      <Dependent Role="RSAF_MASTER_HIST">
         <PropertyRef Name="MASTER_ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -283,17 +253,9 @@ warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a pr
       <End Role="RSAF_DETAIL" EntitySet="RSAF_DETAIL" />
       <End Role="RSAF_ARCHIVE" EntitySet="RSAF_ARCHIVE" />
     </AssociationSet>
-    <AssociationSet Name="FK_RSAF_DETAIL_HIST" Association="Self.FK_RSAF_DETAIL_HIST">
-      <End Role="RSAF_DETAIL" EntitySet="RSAF_DETAIL" />
-      <End Role="RSAF_DETAIL_HIST" EntitySet="RSAF_DETAIL_HIST" />
-    </AssociationSet>
     <AssociationSet Name="FK_RSAF_DETAIL_MASTER" Association="Self.FK_RSAF_DETAIL_MASTER">
       <End Role="RSAF_MASTER" EntitySet="RSAF_MASTER" />
       <End Role="RSAF_DETAIL" EntitySet="RSAF_DETAIL" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RSAF_MASTER_HIST" Association="Self.FK_RSAF_MASTER_HIST">
-      <End Role="RSAF_MASTER" EntitySet="RSAF_MASTER" />
-      <End Role="RSAF_MASTER_HIST" EntitySet="RSAF_MASTER_HIST" />
     </AssociationSet>
     <AssociationSet Name="FK_RSAF_MASTER_SITE" Association="Self.FK_RSAF_MASTER_SITE">
       <End Role="RSAF_SITE" EntitySet="RSAF_SITE" />

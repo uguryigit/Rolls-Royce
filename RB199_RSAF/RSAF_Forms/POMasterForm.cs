@@ -80,11 +80,64 @@ namespace RSAF_Forms
                 /// SAVE CHANGES
                 /// 
                 ///////////////////////////////
-                DetailForm.TxBAEPART.Text = this.TxBAEPART.Text;
-                DetailForm.TxBAEPO.Text = this.TxBAEPO.Text;
-                DetailForm.CxSITE.SelectedIndex = this.CxSITE.SelectedIndex;
-                DetailForm.CxTYPE.SelectedIndex = this.CxTYPE.SelectedIndex;
-                Close();
+                if (DetailForm.TxBAEPART.Text == this.TxBAEPART.Text &&
+                    DetailForm.TxBAEPO.Text == this.TxBAEPO.Text &&
+                    DetailForm.CxSITE.SelectedIndex == this.CxSITE.SelectedIndex &&
+                    DetailForm.CxTYPE.SelectedIndex == this.CxTYPE.SelectedIndex)
+                    MessageBox.Show("There is no change!","Information");
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure to change the PO header values?", "Confirm PO Header Changes", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+
+                        long newmasterId = 0;
+                        List<RSAF_MASTER> lMaster = new List<RSAF_MASTER>();
+                        var b = new RsafDbContext();
+                        lMaster = b.RSAF_MASTER.Where(c => c.BAEPART == this.TxBAEPART.Text.ToString()
+                                                           && c.BAEPO == this.TxBAEPO.Text.ToString()
+                                                           && c.SITE == this.CxSITE.SelectedValue.ToString()
+                                                           && c.TYPE == this.CxTYPE.SelectedValue.ToString()).ToList();
+
+                        if (lMaster != null)
+                            foreach (var x in lMaster)
+                                newmasterId = lMaster.First().MASTER_ID;
+                        b.Dispose();
+
+                        if (newmasterId == 0)
+                        {
+
+                            var a = new RsafDbContext();
+                            var masterPO = a.RSAF_MASTER.Find(masterId);
+
+                            if (DetailForm.TxBAEPART.Text != this.TxBAEPART.Text)
+                                masterPO.BAEPART = this.TxBAEPART.Text;
+
+                            if (DetailForm.TxBAEPO.Text != this.TxBAEPO.Text)
+                                masterPO.BAEPO = this.TxBAEPO.Text;
+
+                            if (DetailForm.CxSITE.SelectedIndex != this.CxSITE.SelectedIndex)
+                                masterPO.SITE = this.CxSITE.SelectedValue.ToString();
+
+                            if (DetailForm.CxTYPE.SelectedIndex != this.CxTYPE.SelectedIndex)
+                                masterPO.TYPE = this.CxTYPE.SelectedValue.ToString();
+
+                            a.SaveChanges();
+                            a.Dispose();
+
+                            DetailForm.TxBAEPART.Text = this.TxBAEPART.Text;
+                            DetailForm.TxBAEPO.Text = this.TxBAEPO.Text;
+                            DetailForm.CxSITE.SelectedIndex = this.CxSITE.SelectedIndex;
+                            DetailForm.CxTYPE.SelectedIndex = this.CxTYPE.SelectedIndex;
+
+                            MessageBox.Show( "PO header has been successfully updated!","Information");
+                            DetailForm.toolStripStatusLabel.Text = "PO header has been changed.";
+                            Close();
+                        }
+                        else
+                            MessageBox.Show("PO header could not updated because there is already a PO which has the same header values. Check them first, please!", "Error");
+                    }
+                }
             }
         }
     }

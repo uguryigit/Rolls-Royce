@@ -181,7 +181,6 @@
           <Property Name="BAEPART" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="SITE" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="TYPE" Type="nvarchar" MaxLength="2" Nullable="false" />
-          <Property Name="MDR" Type="nvarchar" MaxLength="24" Nullable="false" />
           <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="510" />
           <Property Name="ROID_NO" Type="nvarchar" MaxLength="25" />
         </EntityType>
@@ -199,11 +198,6 @@
           <Property Name="TYPE_CODE" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="TYPE" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="RSAF_DESCRIPTION">
-          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="510" />
-        </EntityType>-->
         <Association Name="FK_RSAF_ARCHIVE_DETAIL">
           <End Role="RSAF_DETAIL" Type="Self.RSAF_DETAIL" Multiplicity="1" />
           <End Role="RSAF_ARCHIVE" Type="Self.RSAF_ARCHIVE" Multiplicity="0..1" />
@@ -216,18 +210,6 @@ warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RSAF_DETAIL_HIST">
-          <End Role="RSAF_DETAIL" Type="Self.RSAF_DETAIL" Multiplicity="1" />
-          <End Role="RSAF_DETAIL_HIST" Type="Self.RSAF_DETAIL_HIST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RSAF_DETAIL">
-              <PropertyRef Name="DETAIL_ID" />
-            </Principal>
-            <Dependent Role="RSAF_DETAIL_HIST">
-              <PropertyRef Name="DETAIL_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RSAF_DETAIL_MASTER">
           <End Role="RSAF_MASTER" Type="Self.RSAF_MASTER" Multiplicity="1" />
           <End Role="RSAF_DETAIL" Type="Self.RSAF_DETAIL" Multiplicity="*" />
@@ -236,18 +218,6 @@ warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a pr
               <PropertyRef Name="MASTER_ID" />
             </Principal>
             <Dependent Role="RSAF_DETAIL">
-              <PropertyRef Name="MASTER_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RSAF_MASTER_HIST">
-          <End Role="RSAF_MASTER" Type="Self.RSAF_MASTER" Multiplicity="1" />
-          <End Role="RSAF_MASTER_HIST" Type="Self.RSAF_MASTER_HIST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RSAF_MASTER">
-              <PropertyRef Name="MASTER_ID" />
-            </Principal>
-            <Dependent Role="RSAF_MASTER_HIST">
               <PropertyRef Name="MASTER_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -288,17 +258,9 @@ warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a pr
             <End Role="RSAF_DETAIL" EntitySet="RSAF_DETAIL" />
             <End Role="RSAF_ARCHIVE" EntitySet="RSAF_ARCHIVE" />
           </AssociationSet>
-          <AssociationSet Name="FK_RSAF_DETAIL_HIST" Association="Self.FK_RSAF_DETAIL_HIST">
-            <End Role="RSAF_DETAIL" EntitySet="RSAF_DETAIL" />
-            <End Role="RSAF_DETAIL_HIST" EntitySet="RSAF_DETAIL_HIST" />
-          </AssociationSet>
           <AssociationSet Name="FK_RSAF_DETAIL_MASTER" Association="Self.FK_RSAF_DETAIL_MASTER">
             <End Role="RSAF_MASTER" EntitySet="RSAF_MASTER" />
             <End Role="RSAF_DETAIL" EntitySet="RSAF_DETAIL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RSAF_MASTER_HIST" Association="Self.FK_RSAF_MASTER_HIST">
-            <End Role="RSAF_MASTER" EntitySet="RSAF_MASTER" />
-            <End Role="RSAF_MASTER_HIST" EntitySet="RSAF_MASTER_HIST" />
           </AssociationSet>
           <AssociationSet Name="FK_RSAF_MASTER_SITE" Association="Self.FK_RSAF_MASTER_SITE">
             <End Role="RSAF_SITE" EntitySet="RSAF_SITE" />
@@ -547,7 +509,6 @@ warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a pr
           <Property Name="BAEPART" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="SITE" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="TYPE" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="MDR" Type="String" Nullable="false" MaxLength="24" FixedLength="false" Unicode="true" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="510" FixedLength="false" Unicode="true" />
           <Property Name="ROID_NO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RSAF_MASTER" Relationship="RSAFModel.FK_RSAF_MASTER_HIST" FromRole="RSAF_MASTER_HIST" ToRole="RSAF_MASTER" />
@@ -817,7 +778,6 @@ warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a pr
               <MappingFragment StoreEntitySet="RSAF_MASTER_HIST">
                 <ScalarProperty Name="ROID_NO" ColumnName="ROID_NO" />
                 <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-                <ScalarProperty Name="MDR" ColumnName="MDR" />
                 <ScalarProperty Name="TYPE" ColumnName="TYPE" />
                 <ScalarProperty Name="SITE" ColumnName="SITE" />
                 <ScalarProperty Name="BAEPART" ColumnName="BAEPART" />
@@ -849,6 +809,22 @@ warning 6013: The table/view 'RSAF_Prod.dbo.RSAF_DESCRIPTION' does not have a pr
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram DiagramId="b9a506e311dc4d1da94051c57f725c48" Name="Diagram1">
+        <EntityTypeShape EntityType="RSAFModel.RSAF_SITE" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_TYPE" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_ARCHIVE" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_DETAIL" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_DETAIL_HIST" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_MASTER" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RSAFModel.RSAF_MASTER_HIST" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_ARCHIVE_DETAIL" ManuallyRouted="false" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_DETAIL_HIST" ManuallyRouted="false" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_DETAIL_MASTER" ManuallyRouted="false" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_MASTER_HIST" ManuallyRouted="false" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_MASTER_SITE" ManuallyRouted="false" />
+        <AssociationConnector Association="RSAFModel.FK_RSAF_MASTER_TYPE" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
   </Designer>
 </edmx:Edmx>

@@ -404,6 +404,7 @@ namespace RSAF_Forms
             this.TxPO_REQ.Name = "TxPO_REQ";
             this.TxPO_REQ.Size = new System.Drawing.Size(160, 23);
             this.TxPO_REQ.TabIndex = 34;
+            this.TxPO_REQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxPO_REQ_KeyPress);
             // 
             // TxQUALITY_NO
             // 
@@ -446,6 +447,7 @@ namespace RSAF_Forms
             this.TxSALES_DOCUMENT.Name = "TxSALES_DOCUMENT";
             this.TxSALES_DOCUMENT.Size = new System.Drawing.Size(160, 23);
             this.TxSALES_DOCUMENT.TabIndex = 40;
+            this.TxSALES_DOCUMENT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxSALES_DOCUMENT_KeyPress);
             // 
             // TxQTYREC
             // 
@@ -454,6 +456,7 @@ namespace RSAF_Forms
             this.TxQTYREC.Name = "TxQTYREC";
             this.TxQTYREC.Size = new System.Drawing.Size(160, 22);
             this.TxQTYREC.TabIndex = 18;
+            this.TxQTYREC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxQTYREC_KeyPress);
             // 
             // DtCTRT_DATE
             // 
@@ -473,6 +476,7 @@ namespace RSAF_Forms
             this.TxEX_ENGINE.Name = "TxEX_ENGINE";
             this.TxEX_ENGINE.Size = new System.Drawing.Size(160, 22);
             this.TxEX_ENGINE.TabIndex = 24;
+            this.TxEX_ENGINE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxEX_ENGINE_KeyPress);
             // 
             // TxHOURS_REP
             // 
@@ -489,6 +493,7 @@ namespace RSAF_Forms
             this.TxHOURS_NEW.Name = "TxHOURS_NEW";
             this.TxHOURS_NEW.Size = new System.Drawing.Size(160, 22);
             this.TxHOURS_NEW.TabIndex = 36;
+            this.TxHOURS_NEW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxHOURS_NEW_KeyPress);
             // 
             // TxENG_MARK
             // 
@@ -497,6 +502,7 @@ namespace RSAF_Forms
             this.TxENG_MARK.Name = "TxENG_MARK";
             this.TxENG_MARK.Size = new System.Drawing.Size(160, 22);
             this.TxENG_MARK.TabIndex = 30;
+            this.TxENG_MARK.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxENG_MARK_KeyPress);
             // 
             // TxMDR
             // 
@@ -532,6 +538,7 @@ namespace RSAF_Forms
             this.TxBAEQTY.Name = "TxBAEQTY";
             this.TxBAEQTY.Size = new System.Drawing.Size(160, 22);
             this.TxBAEQTY.TabIndex = 4;
+            this.TxBAEQTY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxBAEQTY_KeyPress);
             // 
             // TxPSIREF
             // 

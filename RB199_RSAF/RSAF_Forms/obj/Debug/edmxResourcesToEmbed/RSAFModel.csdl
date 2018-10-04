@@ -234,7 +234,6 @@
     <Property Name="BAEPART" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="SITE" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
     <Property Name="TYPE" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
-    <Property Name="MDR" Type="String" Nullable="false" MaxLength="24" FixedLength="false" Unicode="true" />
     <Property Name="DESCRIPTION" Type="String" MaxLength="510" FixedLength="false" Unicode="true" />
     <Property Name="ROID_NO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="RSAF_MASTER" Relationship="RSAFModel.FK_RSAF_MASTER_HIST" FromRole="RSAF_MASTER_HIST" ToRole="RSAF_MASTER" />

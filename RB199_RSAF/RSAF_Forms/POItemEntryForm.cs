@@ -130,6 +130,16 @@ namespace RSAF_Forms
 
             if (Purpose == purposeType.Add)
             {
+
+                string ctrtDate="";
+                string baeSent = "";
+
+                if (DtCTRT_DATE.CustomFormat != " ")
+                    ctrtDate=DtCTRT_DATE.Value.ToShortDateString();
+
+                if (DtBAESENT.CustomFormat != " ")
+                    baeSent = DtBAESENT.Value.ToShortDateString();
+
                 DetailForm.AddNewItem
                 (
                     TxPOITEM.Text,
@@ -139,10 +149,10 @@ namespace RSAF_Forms
                     CbWARR.Checked,
                     TxOONUM.Text,
                     TxMDR.Text,
-                    DtCTRT_DATE.Value,
+                    ctrtDate,
                     TxBAEQTY.Text,
                     TxBAESER.Text,
-                    DtBAESENT.Value,
+                    baeSent,
                     TxVENDOR.Text,
                     TxPSIREF.Text,
                     TxOUTPART.Text,
@@ -192,6 +202,48 @@ namespace RSAF_Forms
                 DetailForm.RsafDetailDataGridView.Rows[returnIndex].Cells[28].Value = TxQUALITY_NO.Text;
                 Close();
             }
+        }
+
+        private void TxBAEQTY_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void TxPO_REQ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void TxSALES_DOCUMENT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void TxEX_ENGINE_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void TxHOURS_NEW_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void TxENG_MARK_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void TxQTYREC_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
         }
     }
 }
