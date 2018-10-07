@@ -33,7 +33,7 @@ namespace RSAF_Forms
 
             var query =
                 from c in a.RSAF_MASTER
-                where c.DESCRIPTION != null
+                where c.DESCRIPTION != null && c.STATUS == true
                 orderby c.DESCRIPTION
                 select new { DESCRIPTION = c.DESCRIPTION };
 
@@ -71,6 +71,7 @@ namespace RSAF_Forms
 
             bool isPOItemNull = false;
             bool isPOItemNonUnique = false;
+            bool isAnyChange = false;
             List<string> listItem = new List<string>();
             List<string> distinctlistItem = new List<string>();
             foreach (DataGridViewRow row in RsafDetailDataGridView.Rows)
@@ -93,7 +94,7 @@ namespace RSAF_Forms
                 MessageBox.Show("Records can not be saved. ITEM No fields must have unique values for each item. Please check Item No values and try again.", "Error");
             else
             {
-
+                /* Add the new master record */
                 if (checkMaster() == 0 &&
                     TxBAEPART.Text != "" &&
                     TxBAEPO.Text != "" &&
@@ -114,9 +115,34 @@ namespace RSAF_Forms
                         ROID_NO = TxROID_NO.Text
                     };
                     context.RSAF_MASTER.Add(masterRecord);
+                    isAnyChange = true;
                     context.SaveChanges();
                 }
 
+                short qtyrec;
+                short? Qtyrec = null;
+                bool warr = false;
+                DateTime ctrtdate;
+                DateTime? Ctrtdate = null;
+                short baeqty;
+                short? Baeqty = null;
+                DateTime baesent;
+                DateTime? Baesent = null;
+                long rrpo;
+                long? Rrpo = null;
+                int engmark;
+                int? Engmark = null;
+                int hoursnew;
+                int? Hoursnew = null;
+                int exengine;
+                int? Exengine = null;
+                long salesdocument;
+                long? Salesdocument = null;
+                long poreq;
+                long? Poreq = null;
+
+
+                /* Add the new detail records*/
                 foreach (DataGridViewRow row in RsafDetailDataGridView.Rows)
                 {
 
@@ -127,27 +153,6 @@ namespace RSAF_Forms
                     {
                         var Date = DateTime.Now;
 
-                        short qtyrec;
-                        short? Qtyrec = null;
-                        bool warr = false;
-                        DateTime ctrtdate;
-                        DateTime? Ctrtdate = null;
-                        short baeqty;
-                        short? Baeqty = null;
-                        DateTime baesent;
-                        DateTime? Baesent = null;
-                        long rrpo;
-                        long? Rrpo = null;
-                        int engmark;
-                        int? Engmark = null;
-                        int hoursnew;
-                        int? Hoursnew = null;
-                        int exengine;
-                        int? Exengine = null;
-                        long salesdocument;
-                        long? Salesdocument = null;
-                        long poreq;
-                        long? Poreq = null;
 
                         if (short.TryParse(row.Cells[8].Value.ToString(), out qtyrec))
                             Qtyrec = qtyrec;
@@ -158,7 +163,7 @@ namespace RSAF_Forms
                         if (DateTime.TryParse(row.Cells[12].Value.ToString(), out ctrtdate))
                             Ctrtdate = ctrtdate;
 
-                        if (short.TryParse(row.Cells[19].Value.ToString(), out baeqty))
+                        if (short.TryParse(row.Cells[13].Value.ToString(), out baeqty))
                             Baeqty = baeqty;
 
                         if (DateTime.TryParse(row.Cells[15].Value.ToString(), out baesent))
@@ -214,9 +219,447 @@ namespace RSAF_Forms
                             QUALITY_NO = row.Cells[28].Value.ToString() == "" ? null : row.Cells[28].Value.ToString()
                         };
                         context.RSAF_DETAIL.Add(detailRecord);
+                        isAnyChange = true;
                     }
                 }
+
+                /*Update Any Change in the detail records*/
+                foreach (DataGridViewRow row in RsafDetailDataGridView.Rows)
+                {
+                    if (row.Cells[4].Value != null)
+                    {
+                        var detailPO = context.RSAF_DETAIL.Find(row.Cells[4].Value);
+
+                        if (row.Cells[5].Value == null)
+                        {
+                            if (detailPO.POITEM != null)
+                            {
+                                detailPO.POITEM = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.POITEM != row.Cells[5].Value.ToString())
+                            {
+                                detailPO.POITEM = row.Cells[5].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[6].Value == null)
+                        {
+                            if (detailPO.PART_NO != null)
+                            {
+                                detailPO.PART_NO = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.PART_NO != row.Cells[6].Value.ToString())
+                            {
+                                detailPO.PART_NO = row.Cells[6].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[7].Value == null)
+                        {
+                            if (detailPO.SERIAL != null)
+                            {
+                                detailPO.SERIAL = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.SERIAL != row.Cells[7].Value.ToString())
+                            {
+                                detailPO.SERIAL = row.Cells[7].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[8].Value == null)
+                        {
+                            if (detailPO.QTYREC != null)
+                            {
+                                detailPO.QTYREC = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (short.TryParse(row.Cells[8].Value.ToString(), out qtyrec))
+                                if (detailPO.QTYREC != qtyrec)
+                                {
+                                    detailPO.QTYREC = qtyrec;
+                                    isAnyChange = true;
+                                }
+                        }
+
+                        if (row.Cells[9].Value == null)
+                        {
+                            if (detailPO.WARR != false)
+                            {
+                                detailPO.WARR = false;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            warr = (bool)row.Cells[9].Value;
+                            if (detailPO.WARR != warr)
+                            {
+                                detailPO.WARR = warr;
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[10].Value == null)
+                        {
+                            if (detailPO.OONUM != null)
+                            {
+                                detailPO.OONUM = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.OONUM != row.Cells[10].Value.ToString())
+                            {
+                                detailPO.OONUM = row.Cells[10].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[11].Value == null)
+                        {
+                            if (detailPO.MDR != null)
+                            {
+                                detailPO.MDR = "N/A";
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.MDR != row.Cells[11].Value.ToString())
+                            {
+                                detailPO.MDR = row.Cells[11].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[12].Value == null)
+                        {
+                            if (detailPO.CTRT_DATE != null)
+                            {
+                                detailPO.CTRT_DATE = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            DateTime.TryParse(row.Cells[12].Value.ToString(), out ctrtdate);
+                            if (detailPO.CTRT_DATE != ctrtdate)
+                            {
+                                detailPO.CTRT_DATE = ctrtdate;
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[13].Value == null)
+                        {
+                            if (detailPO.BAEQTY != null)
+                            {
+                                detailPO.BAEQTY = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (short.TryParse(row.Cells[13].Value.ToString(), out baeqty))
+                                if (detailPO.BAEQTY != baeqty)
+                                {
+                                    detailPO.BAEQTY = baeqty;
+                                    isAnyChange = true;
+                                }
+                        }
+
+                        if (row.Cells[14].Value == null)
+                        {
+                            if (detailPO.BAESER != null)
+                            {
+                                detailPO.BAESER = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.BAESER != row.Cells[14].Value.ToString())
+                            {
+                                detailPO.BAESER = row.Cells[14].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[15].Value == null)
+                        {
+                            if (detailPO.BAESENT != null)
+                            {
+                                detailPO.BAESENT = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            DateTime.TryParse(row.Cells[15].Value.ToString(), out baesent);
+                            if (detailPO.BAESENT != baesent)
+                            {
+                                detailPO.BAESENT = baesent;
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[16].Value == null)
+                        {
+                            if (detailPO.VENDOR != null)
+                            {
+                                detailPO.VENDOR = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.VENDOR != row.Cells[16].Value.ToString())
+                            {
+                                detailPO.VENDOR = row.Cells[16].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[17].Value == null)
+                        {
+                            if (detailPO.PSIREF != null)
+                            {
+                                detailPO.PSIREF = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.PSIREF != row.Cells[17].Value.ToString())
+                            {
+                                detailPO.PSIREF = row.Cells[17].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+
+                        if (row.Cells[18].Value == null)
+                        {
+                            if (detailPO.OUTPART != null)
+                            {
+                                detailPO.OUTPART = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.OUTPART != row.Cells[18].Value.ToString())
+                            {
+                                detailPO.OUTPART = row.Cells[18].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[19].Value == null)
+                        {
+                            if (detailPO.RR_PO != null)
+                            {
+                                detailPO.RR_PO = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (long.TryParse(row.Cells[19].Value.ToString(), out rrpo))
+                                if (detailPO.RR_PO != rrpo)
+                                {
+                                    detailPO.RR_PO = rrpo;
+                                    isAnyChange = true;
+                                }
+                        }
+
+                        if (row.Cells[20].Value == null)
+                        {
+                            if (detailPO.ENG_MARK != null)
+                            {
+                                detailPO.ENG_MARK = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (int.TryParse(row.Cells[20].Value.ToString(), out engmark))
+                                if (detailPO.ENG_MARK != engmark)
+                                {
+                                    detailPO.ENG_MARK = engmark;
+                                    isAnyChange = true;
+                                }
+                        }
+
+                        if (row.Cells[21].Value == null)
+                        {
+                            if (detailPO.HOURS_NEW != null)
+                            {
+                                detailPO.HOURS_NEW = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (int.TryParse(row.Cells[21].Value.ToString(), out hoursnew))
+                                if (detailPO.HOURS_NEW != hoursnew)
+                                {
+                                    detailPO.HOURS_NEW = hoursnew;
+                                    isAnyChange = true;
+                                }
+                        }
+
+                        if (row.Cells[22].Value == null)
+                        {
+                            if (detailPO.HOURS_REP != null)
+                            {
+                                detailPO.HOURS_REP = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.HOURS_REP != row.Cells[22].Value.ToString())
+                            {
+                                detailPO.HOURS_REP = row.Cells[22].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[23].Value == null)
+                        {
+                            if (detailPO.RFR != null)
+                            {
+                                detailPO.RFR = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.RFR != row.Cells[23].Value.ToString())
+                            {
+                                detailPO.RFR = row.Cells[23].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[24].Value == null)
+                        {
+                            if (detailPO.EX_ENGINE != null)
+                            {
+                                detailPO.EX_ENGINE = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (int.TryParse(row.Cells[24].Value.ToString(), out exengine))
+                                if (detailPO.EX_ENGINE != exengine)
+                                {
+                                    detailPO.EX_ENGINE = exengine;
+                                    isAnyChange = true;
+                                }
+                        }
+
+                        if (row.Cells[25].Value == null)
+                        {
+                            if (detailPO.SALES_DOCUMENT != null)
+                            {
+                                detailPO.SALES_DOCUMENT = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (long.TryParse(row.Cells[25].Value.ToString(), out salesdocument))
+                                if (detailPO.SALES_DOCUMENT != salesdocument)
+                                {
+                                    detailPO.SALES_DOCUMENT = salesdocument;
+                                    isAnyChange = true;
+                                }
+                        }
+
+                        if (row.Cells[26].Value == null)
+                        {
+                            if (detailPO.PO_REQ != null)
+                            {
+                                detailPO.PO_REQ = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (long.TryParse(row.Cells[26].Value.ToString(), out poreq))
+                                if (detailPO.PO_REQ != poreq)
+                                {
+                                    detailPO.PO_REQ = poreq;
+                                    isAnyChange = true;
+                                }
+                        }
+
+                        if (row.Cells[27].Value == null)
+                        {
+                            if (detailPO.REMARKS != null)
+                            {
+                                detailPO.REMARKS = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.REMARKS != row.Cells[27].Value.ToString())
+                            {
+                                detailPO.REMARKS = row.Cells[27].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+
+                        if (row.Cells[28].Value == null)
+                        {
+                            if (detailPO.QUALITY_NO != null)
+                            {
+                                detailPO.QUALITY_NO = null;
+                                isAnyChange = true;
+                            }
+                        }
+                        else
+                        {
+                            if (detailPO.QUALITY_NO != row.Cells[28].Value.ToString())
+                            {
+                                detailPO.QUALITY_NO = row.Cells[28].Value.ToString();
+                                isAnyChange = true;
+                            }
+                        }
+                    }
+                }
+
                 context.SaveChanges();
+                if (isAnyChange || changeDesc || changeRoid)
+                {
+                    changeDesc = false;
+                    changeRoid = false;
+                    FindDetails();
+                    toolStripStatusLabel.Text = "Saved Changes";
+                }
             }
         }
 
@@ -225,12 +668,12 @@ namespace RSAF_Forms
             this.Validate();
             this.RsafDetailBindingSource.EndEdit();
             commitChanges();
-            toolStripStatusLabel.Text = "Saved Changes";
         }
 
         private void BtAddNewItem_Click(object sender, EventArgs e)
         {
             POItemEntryForm entryItemForm = new POItemEntryForm(purposeType.Add, this);
+            toolStripStatusLabel.Text = "Adding a New Purchase Order";
             entryItemForm.ShowDialog();
         }
 
@@ -293,6 +736,7 @@ namespace RSAF_Forms
             , pREMARKS
             , pQUALITY_NO);
 
+            toolStripStatusLabel.Text = "Added a new PO Item";
             RsafDetailDataGridView.Refresh();
         }
 
@@ -355,7 +799,9 @@ namespace RSAF_Forms
              QUALITY_NO != null ? QUALITY_NO.ToString() : ""
             );
 
+            toolStripStatusLabel.Text = "Editing the PO Item";
             entryItemForm.ShowDialog();
+
         }
         //
         private void FindDetails()
@@ -364,7 +810,10 @@ namespace RSAF_Forms
             List<RSAF_MASTER> listMaster = new List<RSAF_MASTER>();
             List<RSAF_DETAIL> listDetail = new List<RSAF_DETAIL>();
             var a = new RsafDbContext();
-            listMaster = a.RSAF_MASTER.Where(c => c.BAEPART == TxBAEPART.Text.ToString()
+            bool isFetched = false;
+
+            listMaster = a.RSAF_MASTER.Where(c => c.STATUS == true
+                                               && c.BAEPART == TxBAEPART.Text.ToString()
                                                && c.BAEPO == TxBAEPO.Text.ToString()
                                                && c.SITE == CxSITE.SelectedValue.ToString()
                                                && c.TYPE == CxTYPE.SelectedValue.ToString()).ToList();
@@ -388,8 +837,9 @@ namespace RSAF_Forms
             RsafDetailDataGridView.Refresh();
             if (masterId != 0)
             {
-                listDetail = a.RSAF_DETAIL.Where(c => c.MASTER_ID == masterId 
-                                                   && c.STATUS == true).ToList();
+                listDetail = a.RSAF_DETAIL.Where(c => c.MASTER_ID == masterId && c.STATUS == true)
+                                          .OrderBy(c => c.DETAIL_ID)
+                                          .ToList();
 
                 RsafDetailDataGridView.AllowUserToAddRows = true;
                 foreach (var dtl in listDetail)
@@ -427,13 +877,21 @@ namespace RSAF_Forms
                     row.Cells[27].Value = dtl.REMARKS;
                     row.Cells[28].Value = dtl.QUALITY_NO;
                     RsafDetailDataGridView.Rows.Add(row);
+                    isFetched = true;
                 }
                 RsafDetailDataGridView.AllowUserToAddRows = false;
                 a.Dispose();
+                if (isFetched)
+                    toolStripStatusLabel.Text = "Fetched the Existing PO Item(s)";
+                else
+                    toolStripStatusLabel.Text = "Fetched the Existing Purchase Order";
+
             }
+            else
+                toolStripStatusLabel.Text = "Entering a New Purchase Order";
 
         }
-        ////////////////////////////////////////////////
+
         private void TxBAEPART_TextChanged(object sender, EventArgs e)
         {
             if (TxBAEPART.Text != "" && TxBAEPO.Text != "" && CxSITE.SelectedIndex != -1 && CxTYPE.SelectedIndex != -1)
@@ -491,7 +949,8 @@ namespace RSAF_Forms
             long masterId = 0;
             List<RSAF_MASTER> listMaster = new List<RSAF_MASTER>();
             var a = new RsafDbContext();
-            listMaster = a.RSAF_MASTER.Where(c => c.BAEPART == TxBAEPART.Text.ToString()
+            listMaster = a.RSAF_MASTER.Where(c => c.STATUS == true
+                                               && c.BAEPART == TxBAEPART.Text.ToString()
                                                && c.BAEPO == TxBAEPO.Text.ToString()
                                                && c.SITE == CxSITE.SelectedValue.ToString()
                                                && c.TYPE == CxTYPE.SelectedValue.ToString()).ToList();
@@ -514,6 +973,8 @@ namespace RSAF_Forms
                                      this.TxBAEPO.Text,
                                      this.CxSITE.SelectedIndex,
                                      this.CxTYPE.SelectedIndex);
+                toolStripStatusLabel.Text = "Editing Purchase Order Header";
+
                 masterForm.ShowDialog();
             }
         }
@@ -525,37 +986,75 @@ namespace RSAF_Forms
             {
                 if (row.Selected == true)
                 {
-                    if (row.Cells[4].Value != null)
+                    DialogResult dialogResult = MessageBox.Show("Are you sure to remove the selected PO Item?", "Delete Confirmation", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
                     {
-                        var detailPO = context.RSAF_DETAIL.Find(row.Cells[4].Value);
-                        detailPO.STATUS = false;
+                        if (row.Cells[4].Value != null)
+                        {
+                            var detailPO = context.RSAF_DETAIL.Find(row.Cells[4].Value);
+                            detailPO.STATUS = false;
+                            toolStripStatusLabel.Text = "Deleted PO Item";
+                        }
+                        RsafDetailDataGridView.Rows.RemoveAt(row.Index);
                     }
-                    RsafDetailDataGridView.Rows.RemoveAt(row.Index);
                 }
             }
             RsafDetailDataGridView.Refresh();
+
+            long masterId = checkMaster();
+
+            var query =
+                from c in context.RSAF_DETAIL
+                where c.MASTER_ID == masterId && c.STATUS == true
+                select new { DETAIL_ID = c.DETAIL_ID };
+
+            var countDetail = query.Distinct().ToList().Count;
+
+            if (masterId != 0 && countDetail == 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure to remove the Purchase Order Header?", "Delete Confirmation", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    var masterPO = context.RSAF_MASTER.Find(masterId);
+                    masterPO.STATUS = false;
+                    TxBAEPO.Text = "";
+                    TxBAEPART.Text = "";
+                    TxDESCRIPTION.Text = "";
+                    TxROID_NO.Text = "";
+                    CxSITE.SelectedIndex = 0;
+                    CxTYPE.SelectedIndex = 0;
+                    toolStripStatusLabel.Text = "Deleted PO Header";
+                }
+            }
+
         }
 
         private List<DataGridViewRow> copiedRows = new List<DataGridViewRow>();
 
         private void toolStripCopyButton_Click(object sender, EventArgs e)
         {
+            bool isCopied = false;
             copiedRows.Clear();
             foreach (DataGridViewRow row in RsafDetailDataGridView.Rows)
                 if (row.Selected == true)
+                {
                     copiedRows.Add(row);
+                    isCopied = true;
+                }
+            if (isCopied)
+                toolStripStatusLabel.Text = "Copied the PO Item";
+
         }
 
         private void toolStripPasteButton_Click(object sender, EventArgs e)
         {
+            bool isPasted = false;
             foreach (DataGridViewRow row in copiedRows)
             {
+                isPasted = true;
                 DataGridViewRow pastedrow = (DataGridViewRow)RsafDetailDataGridView.Rows[0].Clone();
                 pastedrow.Cells[0].Value = row.Cells[0].Value;
-                //pastedrow.Cells[1].Value = row.Cells[1].Value;
                 pastedrow.Cells[2].Value = row.Cells[2].Value;
-                //pastedrow.Cells[3].Value = row.Cells[3].Value;
-                //pastedrow.Cells[4].Value = row.Cells[4].Value;
                 pastedrow.Cells[5].Value = row.Cells[5].Value;
                 pastedrow.Cells[6].Value = row.Cells[6].Value;
                 pastedrow.Cells[7].Value = row.Cells[7].Value;
@@ -582,6 +1081,8 @@ namespace RSAF_Forms
                 pastedrow.Cells[28].Value = row.Cells[28].Value;
                 RsafDetailDataGridView.Rows.Add(pastedrow);
             }
+            if (isPasted)
+                toolStripStatusLabel.Text = "Pasted the PO Item";
         }
 
         private void CxSITE_TextChanged(object sender, EventArgs e)
@@ -619,6 +1120,8 @@ namespace RSAF_Forms
                                      this.TxBAEPO.Text,
                                      this.CxSITE.SelectedIndex,
                                      this.CxTYPE.SelectedIndex);
+                toolStripStatusLabel.Text = "Editing Purchase Order Header";
+
                 masterForm.ShowDialog();
             }
         }
@@ -634,6 +1137,8 @@ namespace RSAF_Forms
                                      this.TxBAEPO.Text,
                                      this.CxSITE.SelectedIndex,
                                      this.CxTYPE.SelectedIndex);
+                toolStripStatusLabel.Text = "Editing Purchase Order Header";
+
                 masterForm.ShowDialog();
             }
         }
@@ -649,6 +1154,8 @@ namespace RSAF_Forms
                                      this.TxBAEPO.Text,
                                      this.CxSITE.SelectedIndex,
                                      this.CxTYPE.SelectedIndex);
+                toolStripStatusLabel.Text = "Editing Purchase Order Header";
+
                 masterForm.ShowDialog();
             }
         }
@@ -656,10 +1163,11 @@ namespace RSAF_Forms
         private void TxDESCRIPTION_TextChanged(object sender, EventArgs e)
         {
             var mId = checkMaster();
-            if (mId != 0 && !changeDesc)
+            if (mId != 0)
             {
                 var masterPO = context.RSAF_MASTER.Find(mId);
                 masterPO.DESCRIPTION = this.TxDESCRIPTION.Text;
+                toolStripStatusLabel.Text = "Changed Existing Purchase Order Description";
                 changeDesc = true;
             }
         }
@@ -672,10 +1180,11 @@ namespace RSAF_Forms
         private void TxROID_NO_TextChanged(object sender, EventArgs e)
         {
             var mId = checkMaster();
-            if (mId != 0 && !changeRoid)
+            if (mId != 0)
             {
                 var masterPO = context.RSAF_MASTER.Find(mId);
                 masterPO.ROID_NO = this.TxROID_NO.Text;
+                toolStripStatusLabel.Text = "Changed Existing Purchase Order ROID No";
                 changeRoid = true;
             }
         }
@@ -695,12 +1204,10 @@ namespace RSAF_Forms
 
             if (change || changeDesc || changeRoid || changeAddNewItem)
             {
+                toolStripStatusLabel.Text = "The Form Closing";
                 DialogResult dialogResult = MessageBox.Show("Would you like to save changings before leaving?", "Save Changes", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
-                {
                     commitChanges();
-                    context.SaveChanges();
-                }
             }
         }
     }

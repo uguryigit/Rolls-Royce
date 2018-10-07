@@ -131,7 +131,7 @@ namespace RSAF_Forms
                             DetailForm.CxTYPE.SelectedIndex = this.CxTYPE.SelectedIndex;
 
                             MessageBox.Show( "PO header has been successfully updated!","Information");
-                            DetailForm.toolStripStatusLabel.Text = "PO header has been changed.";
+                            DetailForm.toolStripStatusLabel.Text = "Changed Purchase Order Header";
                             Close();
                         }
                         else

@@ -428,6 +428,7 @@ namespace RSAF_Forms
             this.DgREMARKS,
             this.DgQUALITY_NO});
             this.RsafDetailDataGridView.Location = new System.Drawing.Point(32, 157);
+            this.RsafDetailDataGridView.MultiSelect = false;
             this.RsafDetailDataGridView.Name = "RsafDetailDataGridView";
             this.RsafDetailDataGridView.ReadOnly = true;
             this.RsafDetailDataGridView.Size = new System.Drawing.Size(1278, 420);
@@ -665,8 +666,7 @@ namespace RSAF_Forms
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(74, 17);
-            this.toolStripStatusLabel.Text = "Query Result";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // TxROID_NO
             // 
@@ -725,7 +725,7 @@ namespace RSAF_Forms
         }
 
         #endregion
-        public System.Windows.Forms.TextBox TxBAEPART;
+        public System.Windows.Forms.TextBox TxBAEPART; 
         public System.Windows.Forms.TextBox TxBAEPO;
         public System.Windows.Forms.ComboBox CxSITE;
         public System.Windows.Forms.ComboBox CxTYPE;

@@ -8,7 +8,7 @@ namespace RSAF_Forms
         /// </summary>
         /// 
 
-        public void SelectedRowValues(int SelectedRow,
+        public void SelectedRowValues(int SelectedRow, 
         string pPO_REQ,
         string pQUALITY_NO,
         string pVENDOR,

@@ -59,7 +59,7 @@ namespace RSAF_Forms
              TxOONUM.Text = pOONUM;
              TxMDR.Text = pMDR;
              if (pCTRT_DATE!="")
-                DtCTRT_DATE.Value = DateTime.Parse(pCTRT_DATE);
+                //DtCTRT_DATE.Value = DateTime.Parse(pCTRT_DATE);
              TxBAEQTY.Text = pBAEQTY;
              TxBAESER.Text = pBAESER;
              if (pBAESENT != "")
@@ -200,6 +200,7 @@ namespace RSAF_Forms
                 DetailForm.RsafDetailDataGridView.Rows[returnIndex].Cells[26].Value = TxPO_REQ.Text;
                 DetailForm.RsafDetailDataGridView.Rows[returnIndex].Cells[27].Value = TxREMARKS.Text;
                 DetailForm.RsafDetailDataGridView.Rows[returnIndex].Cells[28].Value = TxQUALITY_NO.Text;
+                DetailForm.toolStripStatusLabel.Text = "Changed the PO Item";
                 Close();
             }
         }
