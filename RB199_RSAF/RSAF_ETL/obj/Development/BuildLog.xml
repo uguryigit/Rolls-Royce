@@ -2,18 +2,18 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>RSAF_ETL</Name>
-    <LastWriteTime>2018-09-17T22:23:12.8216548Z</LastWriteTime>
+    <LastWriteTime>2018-12-27T21:25:39.1714737Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>RSAF_Extraction.dtsx</Name>
-      <LastWriteTime>2018-09-16T21:17:04.5805271Z</LastWriteTime>
+      <LastWriteTime>2018-09-16T21:17:04.580527Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>RSAF_Load.dtsx</Name>
-      <LastWriteTime>2018-09-16T21:17:04.4985248Z</LastWriteTime>
+      <LastWriteTime>2018-09-16T21:17:04.498524Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -23,7 +23,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>RSAF_ETL.dtsx</Name>
-      <LastWriteTime>2018-09-16T21:17:04.2504443Z</LastWriteTime>
+      <LastWriteTime>2018-09-16T21:17:04.250444Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

@@ -405,6 +405,7 @@ namespace RSAF_Forms
             this.TxPO_REQ.Size = new System.Drawing.Size(160, 23);
             this.TxPO_REQ.TabIndex = 34;
             this.TxPO_REQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxPO_REQ_KeyPress);
+            this.TxPO_REQ.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxPO_REQ_KeyUp);
             // 
             // TxQUALITY_NO
             // 
@@ -413,6 +414,7 @@ namespace RSAF_Forms
             this.TxQUALITY_NO.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxQUALITY_NO.Location = new System.Drawing.Point(783, 280);
             this.TxQUALITY_NO.Margin = new System.Windows.Forms.Padding(4);
+            this.TxQUALITY_NO.MaxLength = 25;
             this.TxQUALITY_NO.Name = "TxQUALITY_NO";
             this.TxQUALITY_NO.Size = new System.Drawing.Size(160, 23);
             this.TxQUALITY_NO.TabIndex = 48;
@@ -423,6 +425,7 @@ namespace RSAF_Forms
             this.TxVENDOR.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxVENDOR.Location = new System.Drawing.Point(459, 218);
             this.TxVENDOR.Margin = new System.Windows.Forms.Padding(4);
+            this.TxVENDOR.MaxLength = 150;
             this.TxVENDOR.Name = "TxVENDOR";
             this.TxVENDOR.Size = new System.Drawing.Size(160, 23);
             this.TxVENDOR.TabIndex = 42;
@@ -448,6 +451,7 @@ namespace RSAF_Forms
             this.TxSALES_DOCUMENT.Size = new System.Drawing.Size(160, 23);
             this.TxSALES_DOCUMENT.TabIndex = 40;
             this.TxSALES_DOCUMENT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxSALES_DOCUMENT_KeyPress);
+            this.TxSALES_DOCUMENT.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxSALES_DOCUMENT_KeyUp);
             // 
             // TxQTYREC
             // 
@@ -457,6 +461,7 @@ namespace RSAF_Forms
             this.TxQTYREC.Size = new System.Drawing.Size(160, 22);
             this.TxQTYREC.TabIndex = 18;
             this.TxQTYREC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxQTYREC_KeyPress);
+            this.TxQTYREC.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxQTYREC_KeyUp);
             // 
             // DtCTRT_DATE
             // 
@@ -477,11 +482,13 @@ namespace RSAF_Forms
             this.TxEX_ENGINE.Size = new System.Drawing.Size(160, 22);
             this.TxEX_ENGINE.TabIndex = 24;
             this.TxEX_ENGINE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxEX_ENGINE_KeyPress);
+            this.TxEX_ENGINE.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxEX_ENGINE_KeyUp);
             // 
             // TxHOURS_REP
             // 
             this.TxHOURS_REP.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxHOURS_REP.Location = new System.Drawing.Point(783, 218);
+            this.TxHOURS_REP.MaxLength = 20;
             this.TxHOURS_REP.Name = "TxHOURS_REP";
             this.TxHOURS_REP.Size = new System.Drawing.Size(160, 22);
             this.TxHOURS_REP.TabIndex = 44;
@@ -494,6 +501,7 @@ namespace RSAF_Forms
             this.TxHOURS_NEW.Size = new System.Drawing.Size(160, 22);
             this.TxHOURS_NEW.TabIndex = 36;
             this.TxHOURS_NEW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxHOURS_NEW_KeyPress);
+            this.TxHOURS_NEW.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxHOURS_NEW_KeyUp);
             // 
             // TxENG_MARK
             // 
@@ -503,11 +511,13 @@ namespace RSAF_Forms
             this.TxENG_MARK.Size = new System.Drawing.Size(160, 22);
             this.TxENG_MARK.TabIndex = 30;
             this.TxENG_MARK.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxENG_MARK_KeyPress);
+            this.TxENG_MARK.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxENG_MARK_KeyUp);
             // 
             // TxMDR
             // 
             this.TxMDR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxMDR.Location = new System.Drawing.Point(783, 249);
+            this.TxMDR.MaxLength = 24;
             this.TxMDR.Name = "TxMDR";
             this.TxMDR.Size = new System.Drawing.Size(160, 22);
             this.TxMDR.TabIndex = 46;
@@ -539,11 +549,13 @@ namespace RSAF_Forms
             this.TxBAEQTY.Size = new System.Drawing.Size(160, 22);
             this.TxBAEQTY.TabIndex = 4;
             this.TxBAEQTY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxBAEQTY_KeyPress);
+            this.TxBAEQTY.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxBAEQTY_KeyUp);
             // 
             // TxPSIREF
             // 
             this.TxPSIREF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxPSIREF.Location = new System.Drawing.Point(459, 125);
+            this.TxPSIREF.MaxLength = 34;
             this.TxPSIREF.Name = "TxPSIREF";
             this.TxPSIREF.Size = new System.Drawing.Size(160, 22);
             this.TxPSIREF.TabIndex = 22;
@@ -552,6 +564,7 @@ namespace RSAF_Forms
             // 
             this.TxBAESER.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxBAESER.Location = new System.Drawing.Point(136, 34);
+            this.TxBAESER.MaxLength = 30;
             this.TxBAESER.Name = "TxBAESER";
             this.TxBAESER.Size = new System.Drawing.Size(160, 22);
             this.TxBAESER.TabIndex = 2;
@@ -561,6 +574,7 @@ namespace RSAF_Forms
             this.TxPOITEM.BackColor = System.Drawing.SystemColors.Window;
             this.TxPOITEM.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxPOITEM.Location = new System.Drawing.Point(136, 64);
+            this.TxPOITEM.MaxLength = 8;
             this.TxPOITEM.Name = "TxPOITEM";
             this.TxPOITEM.Size = new System.Drawing.Size(160, 22);
             this.TxPOITEM.TabIndex = 8;
@@ -569,6 +583,7 @@ namespace RSAF_Forms
             // 
             this.TxSERIAL.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxSERIAL.Location = new System.Drawing.Point(459, 94);
+            this.TxSERIAL.MaxLength = 20;
             this.TxSERIAL.Name = "TxSERIAL";
             this.TxSERIAL.Size = new System.Drawing.Size(160, 22);
             this.TxSERIAL.TabIndex = 16;
@@ -579,6 +594,7 @@ namespace RSAF_Forms
             this.TxRFR.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxRFR.Location = new System.Drawing.Point(136, 187);
             this.TxRFR.Margin = new System.Windows.Forms.Padding(4);
+            this.TxRFR.MaxLength = 500;
             this.TxRFR.Name = "TxRFR";
             this.TxRFR.Size = new System.Drawing.Size(160, 23);
             this.TxRFR.TabIndex = 32;
@@ -600,6 +616,7 @@ namespace RSAF_Forms
             this.TxOUTPART.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxOUTPART.Location = new System.Drawing.Point(136, 156);
             this.TxOUTPART.Margin = new System.Windows.Forms.Padding(4);
+            this.TxOUTPART.MaxLength = 30;
             this.TxOUTPART.Name = "TxOUTPART";
             this.TxOUTPART.Size = new System.Drawing.Size(160, 23);
             this.TxOUTPART.TabIndex = 26;
@@ -610,6 +627,7 @@ namespace RSAF_Forms
             this.TxOONUM.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxOONUM.Location = new System.Drawing.Point(136, 125);
             this.TxOONUM.Margin = new System.Windows.Forms.Padding(4);
+            this.TxOONUM.MaxLength = 30;
             this.TxOONUM.Name = "TxOONUM";
             this.TxOONUM.Size = new System.Drawing.Size(160, 23);
             this.TxOONUM.TabIndex = 20;
@@ -620,6 +638,7 @@ namespace RSAF_Forms
             this.TxPART_NO.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxPART_NO.Location = new System.Drawing.Point(136, 94);
             this.TxPART_NO.Margin = new System.Windows.Forms.Padding(4);
+            this.TxPART_NO.MaxLength = 30;
             this.TxPART_NO.Name = "TxPART_NO";
             this.TxPART_NO.Size = new System.Drawing.Size(160, 23);
             this.TxPART_NO.TabIndex = 14;

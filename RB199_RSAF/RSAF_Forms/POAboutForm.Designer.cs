@@ -74,8 +74,7 @@
             "Microsoft SQL Server 2017",
             "SQL Server Integration Services",
             "SQL Server Reporting Services",
-            "Microsoft ReportViewer 12.0",
-            "IBM Cognos 11.x"});
+            "Microsoft ReportViewer 12.0"});
             this.LxTechs.Location = new System.Drawing.Point(45, 170);
             this.LxTechs.Name = "LxTechs";
             this.LxTechs.Size = new System.Drawing.Size(321, 139);

@@ -22,6 +22,13 @@ namespace RSAF_Forms
         private int returnIndex;
         private purposeType Purpose;
         private PODetailForm DetailForm;
+        private string strBAEQTY;
+        private string strPO_REQ;
+        private string strSALES_DOCUMENT;
+        private string strEX_ENGINE;
+        private string strHOURS_NEW;
+        private string strENG_MARK;
+        private string strQTYREC;
 
         public void postPODetailFields
             (int pIndex,
@@ -59,11 +66,27 @@ namespace RSAF_Forms
              TxOONUM.Text = pOONUM;
              TxMDR.Text = pMDR;
              if (pCTRT_DATE!="")
-                //DtCTRT_DATE.Value = DateTime.Parse(pCTRT_DATE);
+                try
+                {
+                    DtCTRT_DATE.Value = DateTime.Parse(pCTRT_DATE);
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    MessageBox.Show("The Contract Date is out of range, please specify a valid date");
+                }
+            //DtCTRT_DATE.Value = DateTime.Parse(pCTRT_DATE);
              TxBAEQTY.Text = pBAEQTY;
              TxBAESER.Text = pBAESER;
              if (pBAESENT != "")
-                DtBAESENT.Value = DateTime.Parse(pBAESENT);
+                try
+                {
+                    DtBAESENT.Value = DateTime.Parse(pBAESENT);
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    MessageBox.Show("The BAE PO Date is out of range, please specify a valid date");
+                }
+
              TxVENDOR.Text = pVENDOR;
              TxPSIREF.Text = pPSIREF;
              TxOUTPART.Text = pOUTPART;
@@ -114,7 +137,7 @@ namespace RSAF_Forms
             if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
                 DtCTRT_DATE.CustomFormat = " ";
             if (e.KeyCode == Keys.Space)
-                DtCTRT_DATE.CustomFormat = "dd/MM/yyyy";
+                DtCTRT_DATE.CustomFormat = "dd/MM/yyyy"; 
         }
 
         private void DtBAESENT_KeyDown(object sender, KeyEventArgs e)
@@ -133,6 +156,7 @@ namespace RSAF_Forms
 
                 string ctrtDate="";
                 string baeSent = "";
+
 
                 if (DtCTRT_DATE.CustomFormat != " ")
                     ctrtDate=DtCTRT_DATE.Value.ToShortDateString();
@@ -201,50 +225,155 @@ namespace RSAF_Forms
                 DetailForm.RsafDetailDataGridView.Rows[returnIndex].Cells[27].Value = TxREMARKS.Text;
                 DetailForm.RsafDetailDataGridView.Rows[returnIndex].Cells[28].Value = TxQUALITY_NO.Text;
                 DetailForm.toolStripStatusLabel.Text = "Changed the PO Item";
-                Close();
+                Close(); 
             }
         }
 
         private void TxBAEQTY_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-                e.Handled = true;
+                e.Handled = true; 
+            else
+                strBAEQTY = TxBAEQTY.Text;
         }
 
         private void TxPO_REQ_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
+            else
+                strPO_REQ = TxPO_REQ.Text;
         }
 
         private void TxSALES_DOCUMENT_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
+            else
+                strSALES_DOCUMENT = TxSALES_DOCUMENT.Text;
         }
 
         private void TxEX_ENGINE_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
+            else
+                strEX_ENGINE = TxEX_ENGINE.Text;
         }
 
         private void TxHOURS_NEW_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
+            else
+                strHOURS_NEW = TxHOURS_NEW.Text;
         }
 
         private void TxENG_MARK_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
+            else
+                strENG_MARK = TxENG_MARK.Text;
         }
 
         private void TxQTYREC_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
+            else
+                strQTYREC = TxQTYREC.Text;
+        }
+
+        private void TxBAEQTY_KeyUp(object sender, KeyEventArgs e)
+        {
+            short? nbr;
+                try
+                {
+                    nbr = short.Parse(TxBAEQTY.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxBAEQTY.Text = strBAEQTY;
+                }
+        }
+
+        private void TxQTYREC_KeyUp(object sender, KeyEventArgs e)
+        {
+            short? nbr;
+            try
+            {
+                nbr = short.Parse(TxQTYREC.Text);
+            }
+            catch (Exception OverflowException)
+            {
+                TxQTYREC.Text = strQTYREC;
+            }
+        }
+
+        private void TxPO_REQ_KeyUp(object sender, KeyEventArgs e)
+        {
+            long? nbr;
+            try
+            {
+                nbr = long.Parse(TxPO_REQ.Text);
+            }
+            catch (Exception OverflowException)
+            {
+                TxPO_REQ.Text = strPO_REQ;
+            }
+        }
+
+        private void TxSALES_DOCUMENT_KeyUp(object sender, KeyEventArgs e)
+        {
+            long? nbr;
+            try
+            {
+                nbr = long.Parse(TxSALES_DOCUMENT.Text);
+            }
+            catch (Exception OverflowException)
+            {
+                TxSALES_DOCUMENT.Text = strSALES_DOCUMENT;
+            }
+        }
+
+        private void TxEX_ENGINE_KeyUp(object sender, KeyEventArgs e)
+        {
+            int? nbr;
+            try
+            {
+                nbr = int.Parse(TxEX_ENGINE.Text);
+            }
+            catch (Exception OverflowException)
+            {
+                TxEX_ENGINE.Text = strEX_ENGINE;
+            }
+        }
+
+        private void TxHOURS_NEW_KeyUp(object sender, KeyEventArgs e)
+        {
+            int? nbr;
+            try
+            {
+                nbr = int.Parse(TxHOURS_NEW.Text);
+            }
+            catch (Exception OverflowException)
+            {
+                TxHOURS_NEW.Text = strHOURS_NEW;
+            }
+        }
+
+        private void TxENG_MARK_KeyUp(object sender, KeyEventArgs e)
+        {
+            int? nbr;
+            try
+            {
+                nbr = int.Parse(TxENG_MARK.Text);
+            }
+            catch (Exception OverflowException)
+            {
+                TxENG_MARK.Text = strENG_MARK;
+            }
         }
     }
 }

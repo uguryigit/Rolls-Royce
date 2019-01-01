@@ -351,9 +351,9 @@ namespace RSAF_Forms
                             }
                         }
 
-                        if (row.Cells[12].Value == null)
+                        if (row.Cells[12].Value == null || row.Cells[12].Value.ToString() =="")
                         {
-                            if (detailPO.CTRT_DATE != null)
+                            if (detailPO.CTRT_DATE != null  )
                             {
                                 detailPO.CTRT_DATE = null;
                                 isAnyChange = true;
@@ -404,7 +404,7 @@ namespace RSAF_Forms
                             }
                         }
 
-                        if (row.Cells[15].Value == null)
+                        if (row.Cells[15].Value == null || row.Cells[15].Value.ToString() == "")
                         {
                             if (detailPO.BAESENT != null)
                             {

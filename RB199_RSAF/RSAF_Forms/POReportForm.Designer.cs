@@ -31,43 +31,45 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POReportForm));
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.RSAF_ProdDataSet = new RSAF_Forms.RSAF_ProdDataSet();
-            this.RSAF_DETAILTableAdapter = new RSAF_Forms.RSAF_ProdDataSetTableAdapters.RSAF_DETAILTableAdapter();
             this.RSAF_DETAILBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.RSAF_ProdDataSet = new RSAF_Forms.RSAF_ProdDataSet();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.RSAF_DETAILTableAdapter = new RSAF_Forms.RSAF_ProdDataSetTableAdapters.RSAF_DETAILTableAdapter();
             this.rSAFDETAILBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.RSAF_MASTERBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.RSAF_ProdDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RSAF_DETAILBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RSAF_ProdDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rSAFDETAILBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RSAF_MASTERBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // reportViewer1
+            // RSAF_DETAILBindingSource
             // 
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = null;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "RSAF_Forms.RIA.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(12, 12);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.ReportPath = "http://rr-desktop01/Reports/report/Reports/RSAF/ACCESSORY%20WIP";
-            this.reportViewer1.Size = new System.Drawing.Size(810, 501);
-            this.reportViewer1.TabIndex = 0;
+            this.RSAF_DETAILBindingSource.DataMember = "RSAF_DETAIL";
+            this.RSAF_DETAILBindingSource.DataSource = this.RSAF_ProdDataSet;
             // 
             // RSAF_ProdDataSet
             // 
             this.RSAF_ProdDataSet.DataSetName = "RSAF_ProdDataSet";
             this.RSAF_ProdDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // reportViewer1
+            // 
+            reportDataSource1.Name = "DataSet1";
+            reportDataSource1.Value = this.RSAF_DETAILBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "RSAF_Forms.RIA.rdlc";
+            this.reportViewer1.Location = new System.Drawing.Point(12, 12);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
+            this.reportViewer1.ServerReport.ReportPath = "http://srv/Reports/report/Reports/RSAF/ACCESSORY%20WIP";
+            this.reportViewer1.ServerReport.ReportServerUrl = new System.Uri("http://srv/reportserver", System.UriKind.Absolute);
+            this.reportViewer1.Size = new System.Drawing.Size(810, 501);
+            this.reportViewer1.TabIndex = 0;
+            // 
             // RSAF_DETAILTableAdapter
             // 
             this.RSAF_DETAILTableAdapter.ClearBeforeFill = true;
-            // 
-            // RSAF_DETAILBindingSource
-            // 
-            this.RSAF_DETAILBindingSource.DataMember = "RSAF_DETAIL";
-            this.RSAF_DETAILBindingSource.DataSource = this.RSAF_ProdDataSet;
             // 
             // rSAFDETAILBindingSource
             // 
@@ -90,8 +92,8 @@
             this.Name = "POReportForm";
             this.Text = "Repair Instructions";
             this.Load += new System.EventHandler(this.POReportForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.RSAF_ProdDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RSAF_DETAILBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RSAF_ProdDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rSAFDETAILBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RSAF_MASTERBindingSource)).EndInit();
             this.ResumeLayout(false);

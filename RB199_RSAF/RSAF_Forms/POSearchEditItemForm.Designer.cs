@@ -137,7 +137,6 @@
             this.DtFLEX_DATE = new System.Windows.Forms.DateTimePicker();
             this.BtARCHIVE = new System.Windows.Forms.Button();
             this.RsafDetailBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.BindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -147,6 +146,7 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.BindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TxDETAIL_ID = new System.Windows.Forms.TextBox();
             this.DtUPDATE_DATE = new System.Windows.Forms.DateTimePicker();
@@ -934,9 +934,11 @@
             this.TxPART_NO.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxPART_NO.Location = new System.Drawing.Point(162, 112);
             this.TxPART_NO.Margin = new System.Windows.Forms.Padding(4);
+            this.TxPART_NO.MaxLength = 30;
             this.TxPART_NO.Name = "TxPART_NO";
             this.TxPART_NO.Size = new System.Drawing.Size(160, 23);
             this.TxPART_NO.TabIndex = 6;
+            this.TxPART_NO.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxPART_NO_KeyUp);
             // 
             // RsafDetailBindingSource
             // 
@@ -949,9 +951,11 @@
             this.TxOONUM.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxOONUM.Location = new System.Drawing.Point(162, 143);
             this.TxOONUM.Margin = new System.Windows.Forms.Padding(4);
+            this.TxOONUM.MaxLength = 30;
             this.TxOONUM.Name = "TxOONUM";
             this.TxOONUM.Size = new System.Drawing.Size(160, 23);
             this.TxOONUM.TabIndex = 8;
+            this.TxOONUM.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxOONUM_KeyUp);
             // 
             // CxSITE
             // 
@@ -971,9 +975,11 @@
             this.TxOUTPART.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxOUTPART.Location = new System.Drawing.Point(162, 206);
             this.TxOUTPART.Margin = new System.Windows.Forms.Padding(4);
+            this.TxOUTPART.MaxLength = 30;
             this.TxOUTPART.Name = "TxOUTPART";
             this.TxOUTPART.Size = new System.Drawing.Size(160, 23);
             this.TxOUTPART.TabIndex = 12;
+            this.TxOUTPART.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxOUTPART_KeyUp);
             // 
             // TxRCP
             // 
@@ -985,6 +991,8 @@
             this.TxRCP.Name = "TxRCP";
             this.TxRCP.Size = new System.Drawing.Size(160, 23);
             this.TxRCP.TabIndex = 14;
+            this.TxRCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxRCP_KeyPress);
+            this.TxRCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxRCP_KeyUp);
             // 
             // TxDESPTOBA
             // 
@@ -993,9 +1001,11 @@
             this.TxDESPTOBA.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxDESPTOBA.Location = new System.Drawing.Point(162, 268);
             this.TxDESPTOBA.Margin = new System.Windows.Forms.Padding(4);
+            this.TxDESPTOBA.MaxLength = 16;
             this.TxDESPTOBA.Name = "TxDESPTOBA";
             this.TxDESPTOBA.Size = new System.Drawing.Size(160, 23);
             this.TxDESPTOBA.TabIndex = 16;
+            this.TxDESPTOBA.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxDESPTOBA_KeyUp);
             // 
             // CbINVOICE_PAID
             // 
@@ -1007,6 +1017,7 @@
             this.CbINVOICE_PAID.Size = new System.Drawing.Size(160, 30);
             this.CbINVOICE_PAID.TabIndex = 18;
             this.CbINVOICE_PAID.UseVisualStyleBackColor = true;
+            this.CbINVOICE_PAID.CheckedChanged += new System.EventHandler(this.CbINVOICE_PAID_CheckedChanged);
             // 
             // TxREMARKS
             // 
@@ -1019,6 +1030,7 @@
             this.TxREMARKS.Name = "TxREMARKS";
             this.TxREMARKS.Size = new System.Drawing.Size(483, 83);
             this.TxREMARKS.TabIndex = 20;
+            this.TxREMARKS.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxREMARKS_KeyUp);
             // 
             // TxDESCRIPTION
             // 
@@ -1037,45 +1049,55 @@
             this.TxRFR.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxRFR.Location = new System.Drawing.Point(162, 361);
             this.TxRFR.Margin = new System.Windows.Forms.Padding(4);
+            this.TxRFR.MaxLength = 500;
             this.TxRFR.Name = "TxRFR";
             this.TxRFR.Size = new System.Drawing.Size(483, 23);
             this.TxRFR.TabIndex = 24;
+            this.TxRFR.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxRFR_KeyUp);
             // 
             // TxSERIAL
             // 
             this.TxSERIAL.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxSERIAL.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "SERIAL", true));
             this.TxSERIAL.Location = new System.Drawing.Point(485, 112);
+            this.TxSERIAL.MaxLength = 20;
             this.TxSERIAL.Name = "TxSERIAL";
             this.TxSERIAL.Size = new System.Drawing.Size(160, 23);
             this.TxSERIAL.TabIndex = 26;
+            this.TxSERIAL.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxSERIAL_KeyUp);
             // 
             // TxPOITEM
             // 
             this.TxPOITEM.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxPOITEM.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "POITEM", true));
             this.TxPOITEM.Location = new System.Drawing.Point(485, 81);
+            this.TxPOITEM.MaxLength = 8;
             this.TxPOITEM.Name = "TxPOITEM";
             this.TxPOITEM.Size = new System.Drawing.Size(160, 23);
             this.TxPOITEM.TabIndex = 28;
+            this.TxPOITEM.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxPOITEM_KeyUp);
             // 
             // TxBAESER
             // 
             this.TxBAESER.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxBAESER.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "BAESER", true));
             this.TxBAESER.Location = new System.Drawing.Point(485, 50);
+            this.TxBAESER.MaxLength = 30;
             this.TxBAESER.Name = "TxBAESER";
             this.TxBAESER.Size = new System.Drawing.Size(160, 23);
             this.TxBAESER.TabIndex = 30;
+            this.TxBAESER.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxBAESER_KeyUp);
             // 
             // TxPSIREF
             // 
             this.TxPSIREF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxPSIREF.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "PSIREF", true));
             this.TxPSIREF.Location = new System.Drawing.Point(485, 143);
+            this.TxPSIREF.MaxLength = 34;
             this.TxPSIREF.Name = "TxPSIREF";
             this.TxPSIREF.Size = new System.Drawing.Size(160, 23);
             this.TxPSIREF.TabIndex = 32;
+            this.TxPSIREF.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxPSIREF_KeyUp);
             // 
             // CxTYPE
             // 
@@ -1095,6 +1117,8 @@
             this.TxQTYSCRP.Name = "TxQTYSCRP";
             this.TxQTYSCRP.Size = new System.Drawing.Size(160, 23);
             this.TxQTYSCRP.TabIndex = 36;
+            this.TxQTYSCRP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxQTYSCRP_KeyPress);
+            this.TxQTYSCRP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxQTYSCRP_KeyUp);
             // 
             // TxEURO
             // 
@@ -1104,6 +1128,8 @@
             this.TxEURO.Name = "TxEURO";
             this.TxEURO.Size = new System.Drawing.Size(160, 23);
             this.TxEURO.TabIndex = 38;
+            this.TxEURO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxEURO_KeyPress);
+            this.TxEURO.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxEURO_KeyUp);
             // 
             // DtDESPDATE
             // 
@@ -1132,11 +1158,13 @@
             // TxBAEQTY
             // 
             this.TxBAEQTY.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxBAEQTY.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "BAEQTY", true));
+            this.TxBAEQTY.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "BAEQTY", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.TxBAEQTY.Location = new System.Drawing.Point(808, 50);
             this.TxBAEQTY.Name = "TxBAEQTY";
             this.TxBAEQTY.Size = new System.Drawing.Size(160, 23);
             this.TxBAEQTY.TabIndex = 44;
+            this.TxBAEQTY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxBAEQTY_KeyPress);
+            this.TxBAEQTY.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxBAEQTY_KeyUp);
             // 
             // DtBAESENT
             // 
@@ -1158,10 +1186,12 @@
             this.CbWARR.Size = new System.Drawing.Size(160, 24);
             this.CbWARR.TabIndex = 48;
             this.CbWARR.UseVisualStyleBackColor = true;
+            this.CbWARR.CheckedChanged += new System.EventHandler(this.CbWARR_CheckedChanged);
             // 
             // TxELAPSED_TIME
             // 
             this.TxELAPSED_TIME.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.TxELAPSED_TIME.Enabled = false;
             this.TxELAPSED_TIME.Font = new System.Drawing.Font("MS Reference Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxELAPSED_TIME.Location = new System.Drawing.Point(809, 174);
             this.TxELAPSED_TIME.Multiline = true;
@@ -1184,9 +1214,11 @@
             this.TxQUOTE_REF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxQUOTE_REF.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "QUOTE_REF", true));
             this.TxQUOTE_REF.Location = new System.Drawing.Point(808, 237);
+            this.TxQUOTE_REF.MaxLength = 50;
             this.TxQUOTE_REF.Name = "TxQUOTE_REF";
             this.TxQUOTE_REF.Size = new System.Drawing.Size(160, 23);
             this.TxQUOTE_REF.TabIndex = 54;
+            this.TxQUOTE_REF.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxQUOTE_REF_KeyUp);
             // 
             // CbARCHIVE
             // 
@@ -1206,6 +1238,7 @@
             this.CbPOIC.Size = new System.Drawing.Size(160, 24);
             this.CbPOIC.TabIndex = 58;
             this.CbPOIC.UseVisualStyleBackColor = true;
+            this.CbPOIC.CheckedChanged += new System.EventHandler(this.CbPOIC_CheckedChanged);
             // 
             // TxACC_STG
             // 
@@ -1215,6 +1248,8 @@
             this.TxACC_STG.Name = "TxACC_STG";
             this.TxACC_STG.Size = new System.Drawing.Size(160, 23);
             this.TxACC_STG.TabIndex = 60;
+            this.TxACC_STG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxACC_STG_KeyPress);
+            this.TxACC_STG.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxACC_STG_KeyUp);
             // 
             // TxPAEURO
             // 
@@ -1224,6 +1259,8 @@
             this.TxPAEURO.Name = "TxPAEURO";
             this.TxPAEURO.Size = new System.Drawing.Size(160, 23);
             this.TxPAEURO.TabIndex = 62;
+            this.TxPAEURO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxPAEURO_KeyPress);
+            this.TxPAEURO.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxPAEURO_KeyUp);
             // 
             // BtRI
             // 
@@ -1242,19 +1279,23 @@
             this.TxMODULE_TEXT.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "MODULE_TEXT", true));
             this.TxMODULE_TEXT.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxMODULE_TEXT.Location = new System.Drawing.Point(806, 515);
+            this.TxMODULE_TEXT.MaxLength = 510;
             this.TxMODULE_TEXT.Multiline = true;
             this.TxMODULE_TEXT.Name = "TxMODULE_TEXT";
             this.TxMODULE_TEXT.Size = new System.Drawing.Size(486, 53);
             this.TxMODULE_TEXT.TabIndex = 65;
+            this.TxMODULE_TEXT.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxMODULE_TEXT_KeyUp);
             // 
             // TxMDR
             // 
             this.TxMDR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxMDR.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "MDR", true));
             this.TxMDR.Location = new System.Drawing.Point(1131, 361);
+            this.TxMDR.MaxLength = 24;
             this.TxMDR.Name = "TxMDR";
             this.TxMDR.Size = new System.Drawing.Size(160, 23);
             this.TxMDR.TabIndex = 66;
+            this.TxMDR.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxMDR_KeyUp);
             // 
             // DtRECDATE
             // 
@@ -1276,6 +1317,8 @@
             this.TxENG_MARK.Name = "TxENG_MARK";
             this.TxENG_MARK.Size = new System.Drawing.Size(160, 23);
             this.TxENG_MARK.TabIndex = 70;
+            this.TxENG_MARK.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxENG_MARK_KeyPress);
+            this.TxENG_MARK.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxENG_MARK_KeyUp);
             // 
             // TxHOURS_NEW
             // 
@@ -1285,15 +1328,19 @@
             this.TxHOURS_NEW.Name = "TxHOURS_NEW";
             this.TxHOURS_NEW.Size = new System.Drawing.Size(160, 23);
             this.TxHOURS_NEW.TabIndex = 72;
+            this.TxHOURS_NEW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxHOURS_NEW_KeyPress);
+            this.TxHOURS_NEW.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxHOURS_NEW_KeyUp);
             // 
             // TxHOURS_REP
             // 
             this.TxHOURS_REP.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxHOURS_REP.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "HOURS_REP", true));
             this.TxHOURS_REP.Location = new System.Drawing.Point(1131, 237);
+            this.TxHOURS_REP.MaxLength = 20;
             this.TxHOURS_REP.Name = "TxHOURS_REP";
             this.TxHOURS_REP.Size = new System.Drawing.Size(160, 23);
             this.TxHOURS_REP.TabIndex = 74;
+            this.TxHOURS_REP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxHOURS_REP_KeyUp);
             // 
             // DtQUOTE_REF_DATE
             // 
@@ -1315,6 +1362,8 @@
             this.TxEX_ENGINE.Name = "TxEX_ENGINE";
             this.TxEX_ENGINE.Size = new System.Drawing.Size(160, 23);
             this.TxEX_ENGINE.TabIndex = 78;
+            this.TxEX_ENGINE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxEX_ENGINE_KeyPress);
+            this.TxEX_ENGINE.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxEX_ENGINE_KeyUp);
             // 
             // DtCTRT_DATE
             // 
@@ -1364,7 +1413,7 @@
             // 
             // RsafDetailBindingNavigator
             // 
-            this.RsafDetailBindingNavigator.AddNewItem = this.BindingNavigatorSaveItem;
+            this.RsafDetailBindingNavigator.AddNewItem = null;
             this.RsafDetailBindingNavigator.BindingSource = this.RsafDetailBindingSource;
             this.RsafDetailBindingNavigator.CountItem = this.bindingNavigatorCountItem;
             this.RsafDetailBindingNavigator.DeleteItem = null;
@@ -1391,15 +1440,6 @@
             this.RsafDetailBindingNavigator.TabIndex = 86;
             this.RsafDetailBindingNavigator.Text = "bindingNavigator1";
             this.RsafDetailBindingNavigator.RefreshItems += new System.EventHandler(this.RsafDetailBindingNavigator_RefreshItems);
-            // 
-            // BindingNavigatorSaveItem
-            // 
-            this.BindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("BindingNavigatorSaveItem.Image")));
-            this.BindingNavigatorSaveItem.Name = "BindingNavigatorSaveItem";
-            this.BindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
-            this.BindingNavigatorSaveItem.Text = "Save Data";
-            this.BindingNavigatorSaveItem.Click += new System.EventHandler(this.BindingNavigatorSaveItem_Click);
             // 
             // bindingNavigatorCountItem
             // 
@@ -1468,6 +1508,15 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // BindingNavigatorSaveItem
+            // 
+            this.BindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.BindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("BindingNavigatorSaveItem.Image")));
+            this.BindingNavigatorSaveItem.Name = "BindingNavigatorSaveItem";
+            this.BindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
+            this.BindingNavigatorSaveItem.Text = "Save Data";
+            this.BindingNavigatorSaveItem.Click += new System.EventHandler(this.BindingNavigatorSaveItem_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -1513,9 +1562,11 @@
             this.TxINVOICE_NO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TxINVOICE_NO.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "INVOICE_NO", true));
             this.TxINVOICE_NO.Location = new System.Drawing.Point(807, 299);
+            this.TxINVOICE_NO.MaxLength = 20;
             this.TxINVOICE_NO.Name = "TxINVOICE_NO";
             this.TxINVOICE_NO.Size = new System.Drawing.Size(160, 23);
             this.TxINVOICE_NO.TabIndex = 96;
+            this.TxINVOICE_NO.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxINVOICE_NO_KeyUp);
             // 
             // LblINVOICE_NO
             // 
@@ -1534,9 +1585,11 @@
             this.TxFLEX3.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxFLEX3.Location = new System.Drawing.Point(162, 576);
             this.TxFLEX3.Margin = new System.Windows.Forms.Padding(4);
+            this.TxFLEX3.MaxLength = 255;
             this.TxFLEX3.Name = "TxFLEX3";
             this.TxFLEX3.Size = new System.Drawing.Size(160, 23);
             this.TxFLEX3.TabIndex = 105;
+            this.TxFLEX3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxFLEX3_KeyUp);
             // 
             // TxVENDOR_MATERIAL_COST
             // 
@@ -1548,6 +1601,8 @@
             this.TxVENDOR_MATERIAL_COST.Name = "TxVENDOR_MATERIAL_COST";
             this.TxVENDOR_MATERIAL_COST.Size = new System.Drawing.Size(160, 23);
             this.TxVENDOR_MATERIAL_COST.TabIndex = 103;
+            this.TxVENDOR_MATERIAL_COST.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxVENDOR_MATERIAL_COST_KeyPress);
+            this.TxVENDOR_MATERIAL_COST.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxVENDOR_MATERIAL_COST_KeyUp);
             // 
             // TxRR_PO
             // 
@@ -1559,6 +1614,8 @@
             this.TxRR_PO.Name = "TxRR_PO";
             this.TxRR_PO.Size = new System.Drawing.Size(160, 23);
             this.TxRR_PO.TabIndex = 101;
+            this.TxRR_PO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxRR_PO_KeyPress);
+            this.TxRR_PO.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxRR_PO_KeyUp);
             // 
             // TxSALES_DOCUMENT
             // 
@@ -1567,9 +1624,12 @@
             this.TxSALES_DOCUMENT.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxSALES_DOCUMENT.Location = new System.Drawing.Point(162, 392);
             this.TxSALES_DOCUMENT.Margin = new System.Windows.Forms.Padding(4);
+            this.TxSALES_DOCUMENT.MaxLength = 150;
             this.TxSALES_DOCUMENT.Name = "TxSALES_DOCUMENT";
             this.TxSALES_DOCUMENT.Size = new System.Drawing.Size(160, 23);
             this.TxSALES_DOCUMENT.TabIndex = 99;
+            this.TxSALES_DOCUMENT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxSALES_DOCUMENT_KeyPress);
+            this.TxSALES_DOCUMENT.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxSALES_DOCUMENT_KeyUp);
             // 
             // TxFLEX4
             // 
@@ -1578,9 +1638,11 @@
             this.TxFLEX4.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxFLEX4.Location = new System.Drawing.Point(485, 576);
             this.TxFLEX4.Margin = new System.Windows.Forms.Padding(4);
+            this.TxFLEX4.MaxLength = 255;
             this.TxFLEX4.Name = "TxFLEX4";
             this.TxFLEX4.Size = new System.Drawing.Size(160, 23);
             this.TxFLEX4.TabIndex = 113;
+            this.TxFLEX4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxFLEX4_KeyUp);
             // 
             // TxVENDOR_LABOR_COST
             // 
@@ -1592,6 +1654,8 @@
             this.TxVENDOR_LABOR_COST.Name = "TxVENDOR_LABOR_COST";
             this.TxVENDOR_LABOR_COST.Size = new System.Drawing.Size(160, 23);
             this.TxVENDOR_LABOR_COST.TabIndex = 111;
+            this.TxVENDOR_LABOR_COST.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxVENDOR_LABOR_COST_KeyPress);
+            this.TxVENDOR_LABOR_COST.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxVENDOR_LABOR_COST_KeyUp);
             // 
             // TxROID_NO
             // 
@@ -1611,9 +1675,11 @@
             this.TxVENDOR_COFC.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxVENDOR_COFC.Location = new System.Drawing.Point(485, 423);
             this.TxVENDOR_COFC.Margin = new System.Windows.Forms.Padding(4);
+            this.TxVENDOR_COFC.MaxLength = 50;
             this.TxVENDOR_COFC.Name = "TxVENDOR_COFC";
             this.TxVENDOR_COFC.Size = new System.Drawing.Size(160, 23);
             this.TxVENDOR_COFC.TabIndex = 107;
+            this.TxVENDOR_COFC.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxVENDOR_COFC_KeyUp);
             // 
             // TxFLEX1
             // 
@@ -1622,9 +1688,11 @@
             this.TxFLEX1.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxFLEX1.Location = new System.Drawing.Point(162, 545);
             this.TxFLEX1.Margin = new System.Windows.Forms.Padding(4);
+            this.TxFLEX1.MaxLength = 255;
             this.TxFLEX1.Name = "TxFLEX1";
             this.TxFLEX1.Size = new System.Drawing.Size(160, 23);
             this.TxFLEX1.TabIndex = 121;
+            this.TxFLEX1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxFLEX1_KeyUp);
             // 
             // TxAWB_DETAILS
             // 
@@ -1633,9 +1701,11 @@
             this.TxAWB_DETAILS.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxAWB_DETAILS.Location = new System.Drawing.Point(162, 299);
             this.TxAWB_DETAILS.Margin = new System.Windows.Forms.Padding(4);
+            this.TxAWB_DETAILS.MaxLength = 100;
             this.TxAWB_DETAILS.Name = "TxAWB_DETAILS";
             this.TxAWB_DETAILS.Size = new System.Drawing.Size(160, 23);
             this.TxAWB_DETAILS.TabIndex = 119;
+            this.TxAWB_DETAILS.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxAWB_DETAILS_KeyUp);
             // 
             // TxQUALITY_NO
             // 
@@ -1644,9 +1714,11 @@
             this.TxQUALITY_NO.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxQUALITY_NO.Location = new System.Drawing.Point(1132, 392);
             this.TxQUALITY_NO.Margin = new System.Windows.Forms.Padding(4);
+            this.TxQUALITY_NO.MaxLength = 25;
             this.TxQUALITY_NO.Name = "TxQUALITY_NO";
             this.TxQUALITY_NO.Size = new System.Drawing.Size(160, 23);
             this.TxQUALITY_NO.TabIndex = 117;
+            this.TxQUALITY_NO.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxQUALITY_NO_KeyUp);
             // 
             // TxVENDOR
             // 
@@ -1658,6 +1730,7 @@
             this.TxVENDOR.Name = "TxVENDOR";
             this.TxVENDOR.Size = new System.Drawing.Size(160, 23);
             this.TxVENDOR.TabIndex = 115;
+            this.TxVENDOR.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxVENDOR_KeyUp);
             // 
             // TxFLEX2
             // 
@@ -1666,20 +1739,24 @@
             this.TxFLEX2.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxFLEX2.Location = new System.Drawing.Point(485, 545);
             this.TxFLEX2.Margin = new System.Windows.Forms.Padding(4);
+            this.TxFLEX2.MaxLength = 255;
             this.TxFLEX2.Name = "TxFLEX2";
             this.TxFLEX2.Size = new System.Drawing.Size(160, 23);
             this.TxFLEX2.TabIndex = 129;
+            this.TxFLEX2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxFLEX2_KeyUp);
             // 
             // TxSAP_SES
             // 
             this.TxSAP_SES.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.TxSAP_SES.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "SAP_SES", true));
+            this.TxSAP_SES.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RsafDetailBindingSource, "SAP_SES", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.TxSAP_SES.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxSAP_SES.Location = new System.Drawing.Point(485, 392);
             this.TxSAP_SES.Margin = new System.Windows.Forms.Padding(4);
             this.TxSAP_SES.Name = "TxSAP_SES";
             this.TxSAP_SES.Size = new System.Drawing.Size(160, 23);
             this.TxSAP_SES.TabIndex = 125;
+            this.TxSAP_SES.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxSAP_SES_KeyPress);
+            this.TxSAP_SES.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxSAP_SES_KeyUp);
             // 
             // TxPO_REQ
             // 
@@ -1691,6 +1768,8 @@
             this.TxPO_REQ.Name = "TxPO_REQ";
             this.TxPO_REQ.Size = new System.Drawing.Size(160, 23);
             this.TxPO_REQ.TabIndex = 123;
+            this.TxPO_REQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxPO_REQ_KeyPress);
+            this.TxPO_REQ.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxPO_REQ_KeyUp);
             // 
             // DtPSIDATE
             // 
@@ -1712,6 +1791,8 @@
             this.TxQTYREC.Name = "TxQTYREC";
             this.TxQTYREC.Size = new System.Drawing.Size(160, 23);
             this.TxQTYREC.TabIndex = 94;
+            this.TxQTYREC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxQTYREC_KeyPress);
+            this.TxQTYREC.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxQTYREC_KeyUp);
             // 
             // statusStrip
             // 
@@ -1869,6 +1950,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "POSearchEditItemForm";
             this.Text = "Edit/Search Purchase Order Item";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.POSearchEditItemForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.POSearchEditItemForm_FormClosed);
             this.Load += new System.EventHandler(this.POSearchEditItemForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingSource)).EndInit();

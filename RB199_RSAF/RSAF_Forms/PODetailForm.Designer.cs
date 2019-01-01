@@ -44,6 +44,7 @@ namespace RSAF_Forms
             this.TxDESCRIPTION = new System.Windows.Forms.TextBox();
             this.BtAddNewItem = new System.Windows.Forms.Button();
             this.RsafDetailBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.RsafDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -92,7 +93,6 @@ namespace RSAF_Forms
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.TxROID_NO = new System.Windows.Forms.TextBox();
-            this.RsafDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             LbBAEPART = new System.Windows.Forms.Label();
             LbBAEPO = new System.Windows.Forms.Label();
             LbSITE = new System.Windows.Forms.Label();
@@ -101,9 +101,9 @@ namespace RSAF_Forms
             LbROID_NO = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingNavigator)).BeginInit();
             this.RsafDetailBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RsafDetailDataGridView)).BeginInit();
             this.StatusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // LbBAEPART
@@ -266,6 +266,10 @@ namespace RSAF_Forms
             this.RsafDetailBindingNavigator.Size = new System.Drawing.Size(1276, 25);
             this.RsafDetailBindingNavigator.TabIndex = 15;
             this.RsafDetailBindingNavigator.Text = "bindingNavigator1";
+            // 
+            // RsafDetailBindingSource
+            // 
+            this.RsafDetailBindingSource.DataSource = typeof(RSAF_Forms.RSAF_DETAIL);
             // 
             // bindingNavigatorCountItem
             // 
@@ -679,10 +683,6 @@ namespace RSAF_Forms
             this.TxROID_NO.TabIndex = 12;
             this.TxROID_NO.TextChanged += new System.EventHandler(this.TxROID_NO_TextChanged);
             // 
-            // RsafDetailBindingSource
-            // 
-            this.RsafDetailBindingSource.DataSource = typeof(RSAF_Forms.RSAF_DETAIL);
-            // 
             // PODetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -715,10 +715,10 @@ namespace RSAF_Forms
             ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingNavigator)).EndInit();
             this.RsafDetailBindingNavigator.ResumeLayout(false);
             this.RsafDetailBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RsafDetailDataGridView)).EndInit();
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.RsafDetailBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

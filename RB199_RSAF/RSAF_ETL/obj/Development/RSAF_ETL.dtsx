@@ -7,7 +7,7 @@
   DTS:CreatorName="RR-DESKTOP01\uyigit.admin"
   DTS:DTSID="{807FAFAF-F5E7-43B3-B156-8E1F6FEB20BE}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.3002.107"
+  DTS:LastModifiedProductVersion="15.0.0900.40"
   DTS:LocaleID="2057"
   DTS:ObjectName="RSAF_ETL"
   DTS:PackageType="5"

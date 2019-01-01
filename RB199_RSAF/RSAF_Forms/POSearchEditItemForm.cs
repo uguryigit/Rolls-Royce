@@ -27,7 +27,7 @@ namespace RSAF_Forms
         {
             POArchiveForm archiveForm = new POArchiveForm();
 
-            if (TxDETAIL_ID.Text!="")
+            if (TxDETAIL_ID.Text != "")
                 archiveForm.loadArchieve(long.Parse(TxDETAIL_ID.Text));
             archiveForm.ShowDialog();
         }
@@ -37,14 +37,15 @@ namespace RSAF_Forms
             List<RSAF_TYPE> listType = new List<RSAF_TYPE>();
             List<RSAF_SITE> listSite = new List<RSAF_SITE>();
 
+
             var detail = rsafDbContext.RSAF_DETAIL.Where(c => c.ARCHIVE == false)
-                                                  .OrderBy(c=> c.POITEM)
+                                                  .OrderBy(c => c.POITEM)
                                                   .OrderBy(c => c.MASTER_ID)
                                                   .OrderByDescending(c => c.BAESENT)
                                                   .ToList();
-            
-            RsafDetailBindingSource.DataSource=detail;
- 
+
+            RsafDetailBindingSource.DataSource = detail;
+
 
             var type = rsafDbContext.RSAF_TYPE.ToList();
             listType = type;
@@ -79,6 +80,20 @@ namespace RSAF_Forms
             this.DtUPDATE_DATE.Visible = false;
             this.TxDETAIL_ID.Visible = false;
 
+            long numberOfrecords = detail.Count;
+            string msg;
+
+            if (numberOfrecords == 0)
+                msg = "Found no record ";
+            else
+            {
+                if (numberOfrecords == 1)
+                    msg = "Found 1 record ";
+                else
+                    msg = "Found " + numberOfrecords.ToString() + " records ";
+            }
+
+            toolStripStatusLabel.Text = msg + "which ARCHIVED equals to untick.";
         }
         public void postSearchCriteria(int pFieldIndex,
                                        bool pCheckboxValue,
@@ -90,8 +105,9 @@ namespace RSAF_Forms
 
             this.toolStripStatusLabel.Text = "Searching ...";
             DateTime vDateValue = DateTime.Now;
+            string msgLast = "";
             if (pDateValue.Value != null)
-               vDateValue =  DateTime.Parse(pDateValue.Value.ToShortDateString());
+                vDateValue = DateTime.Parse(pDateValue.Value.ToShortDateString());
 
             switch (pFieldIndex)
             {
@@ -103,6 +119,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which BAe P/N equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -111,6 +128,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which BAe P/N contains " + pTextValue + ".";
                     }
                     break;
                 case 1://TxBAESER
@@ -121,6 +139,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which BAES S/N equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -129,6 +148,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which BAES S/N contains " + pTextValue + ".";
                     }
                     break;
                 case 2://TxBAEQTY
@@ -139,6 +159,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which BAES QTY equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -147,6 +168,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which BAES QTY contains " + pTextValue + ".";
                     }
                     break;
                 case 3://DtBAESENT
@@ -155,6 +177,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which BAES PO DATE equals to " + vDateValue.ToShortDateString() + ".";
                     break;
                 case 4://TxBAEPO
                     if (pSearchCriteria == "E")
@@ -164,6 +187,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which BAe Po No equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -172,6 +196,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which BAe Po No contains " + pTextValue + ".";
                     }
                     break;
                 case 5://TxPOITEM
@@ -182,6 +207,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which ITEM No equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -190,6 +216,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which ITEM No contains " + pTextValue + ".";
                     }
                     break;
                 case 6://CbWARR
@@ -198,6 +225,10 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    if (pCheckboxValue)
+                        msgLast = "which WARRANTY equals to tick.";
+                    else
+                        msgLast = "which WARRANTY equals to untick."; ;
                     break;
                 case 7://CbPOIC
                     query = rsafDbContext.RSAF_DETAIL.Where(c => c.POIC == pCheckboxValue)
@@ -205,6 +236,11 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+
+                    if (pCheckboxValue)
+                        msgLast = "which PO ITEM CLOSED equals to tick.";
+                    else
+                        msgLast = "which PO ITEM CLOSED equals to untick."; ;
                     break;
                 case 8://TxPART_NO
                     if (pSearchCriteria == "E")
@@ -214,6 +250,8 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+
+                        msgLast = "which RECVD P/N equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -222,6 +260,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which RECVD P/N contains " + pTextValue + ".";
                     }
                     break;
                 case 9://TxSERIAL
@@ -232,6 +271,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which RECVD S/N equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -240,6 +280,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which RECVD S/N contains " + pTextValue + ".";
                     }
                     break;
                 case 10://TxQTYREC
@@ -250,6 +291,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which RECVD QTY equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -258,6 +300,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which RECVD QTY contains " + pTextValue + ".";
                     }
                     break;
                 case 11://DtRECDATE
@@ -266,6 +309,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which RECVD DATE equals to " + vDateValue.ToShortDateString() + ".";
                     break;
                 case 12://TxOONUM
                     if (pSearchCriteria == "E")
@@ -275,6 +319,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which SAP NWA equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -283,6 +328,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which SAP NWA contains " + pTextValue + ".";
                     }
                     break;
                 case 13://TxPSIREF
@@ -293,6 +339,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which R.I. REF equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -301,6 +348,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which R.I. REF contains " + pTextValue + ".";
                     }
                     break;
                 case 14://DtPSIDATE
@@ -309,6 +357,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which DATE equals to " + vDateValue.ToShortDateString() + ".";
                     break;
                 case 15://TxEX_ENGINE
                     if (pSearchCriteria == "E")
@@ -318,6 +367,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which EX ENGINE equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -326,6 +376,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which EX ENGINE contains " + pTextValue + ".";
                     }
                     break;
                 case 16://TxENG_MARK
@@ -336,6 +387,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which ENG MK equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -344,6 +396,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which ENG MK contains " + pTextValue + ".";
                     }
                     break;
                 case 17://TxHOURS_NEW
@@ -354,6 +407,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which HOURS NEW equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -362,6 +416,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which HOURS NEW contains " + pTextValue + ".";
                     }
                     break;
                 case 18://TxHOURS_REP
@@ -372,6 +427,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which HOURS REP equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -380,6 +436,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which HOURS REP contains " + pTextValue + ".";
                     }
                     break;
                 case 19://CxSITE
@@ -388,6 +445,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which SITE equals to " + pListboxValue + ".";
                     break;
                 case 20://CxTYPE
                     query = rsafDbContext.RSAF_DETAIL.Where(c => c.RSAF_MASTER.TYPE == pListboxValue)
@@ -395,6 +453,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which TYPE equals to " + pListboxValue + ".";
                     break;
                 case 21://TxOUTPART
                     if (pSearchCriteria == "E")
@@ -404,6 +463,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which P/N EX REPAIR equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -412,6 +472,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which P/N EX REPAIR contains " + pTextValue + ".";
                     }
                     break;
                 case 22://TxQTYSCRP
@@ -422,6 +483,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which SCRAP equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -430,6 +492,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which SCRAP contains " + pTextValue + ".";
                     }
                     break;
                 case 23://TxRCP
@@ -440,6 +503,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which REPAIR COST (£) equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -448,6 +512,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which REPAIR COST (£) contains " + pTextValue + ".";
                     }
                     break;
                 case 24://TxEURO
@@ -458,6 +523,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which EURO equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -466,6 +532,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which EURO contains " + pTextValue + ".";
                     }
                     break;
                 case 25://TxQUOTE_REF
@@ -476,6 +543,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which QUOTE No equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -484,6 +552,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which QUOTE No contains " + pTextValue + ".";
                     }
                     break;
                 case 26://DtQUOTE_REF_DATE
@@ -492,6 +561,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which QUOTE DATE equals to " + vDateValue.ToShortDateString() + ".";
                     break;
                 case 27://CbARCHIVE
                     query = rsafDbContext.RSAF_DETAIL.Where(c => c.ARCHIVE == pCheckboxValue)
@@ -499,6 +569,10 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    if (pCheckboxValue)
+                        msgLast = "which ARCHIVED equals to tick.";
+                    else
+                        msgLast = "which ARCHIVED equals to untick.";
                     break;
                 case 28://TxDESPTOBA
                     if (pSearchCriteria == "E")
@@ -508,6 +582,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which R.R. R/NOTE equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -516,6 +591,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which R.R. R/NOTE contains " + pTextValue + ".";
                     }
                     break;
                 case 29://DtDESPDATE
@@ -524,6 +600,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which DESPATCH DATE equals to " + vDateValue.ToShortDateString() + ".";
                     break;
                 case 30://TxAWB_DETAILS
                     if (pSearchCriteria == "E")
@@ -533,6 +610,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which AWB DETAILS equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -541,6 +619,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which AWB DETAILS contains " + pTextValue + ".";
                     }
                     break;
                 case 31://DtINVOICE_REQUESTED
@@ -549,6 +628,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which INVOICE DATE equals to " + vDateValue.ToShortDateString() + ".";
                     break;
                 case 32://TxINVOICE_NO
                     if (pSearchCriteria == "E")
@@ -558,6 +638,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which INVOICE No equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -566,6 +647,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which INVOICE No contains " + pTextValue + ".";
                     }
                     break;
                 case 33://DtCTRT_DATE
@@ -574,6 +656,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which CONTRACT DATE equals to " + vDateValue.ToShortDateString() + ".";
                     break;
                 case 34://TxDESCRIPTION
                     if (pSearchCriteria == "E")
@@ -583,6 +666,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which DESCRIPTION equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -591,6 +675,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which DESCRIPTION contains " + pTextValue + ".";
                     }
                     break;
                 case 35://TxACC_STG
@@ -601,6 +686,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which P or A STG equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -609,6 +695,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which P or A STG contains " + pTextValue + ".";
                     }
                     break;
                 case 36://TxPAEURO
@@ -619,6 +706,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which P or A EURO equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -627,6 +715,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which P or A EURO contains " + pTextValue + ".";
                     }
                     break;
                 case 37://DtPROMISE
@@ -635,6 +724,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which PROMISE DATE equals to " + vDateValue.ToShortDateString() + ".";
                     break;
                 case 38://TxRFR
                     if (pSearchCriteria == "E")
@@ -644,6 +734,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which R.F.R equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -652,6 +743,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which R.F.R contains " + pTextValue + ".";
                     }
                     break;
                 case 39://TxMDR
@@ -662,6 +754,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which MDR equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -670,6 +763,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which MDR contains " + pTextValue + ".";
                     }
                     break;
                 case 40://TxQUALITY_NO
@@ -680,6 +774,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which QUALITY No equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -688,6 +783,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which QUALITY No contains " + pTextValue + ".";
                     }
                     break;
                 case 41://TxSALES_DOCUMENT
@@ -698,6 +794,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which SALES DOC No equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -706,6 +803,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which SALES DOC No contains " + pTextValue + ".";
                     }
                     break;
                 case 42://TxSAP_SES
@@ -716,6 +814,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which SAP SES equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -724,6 +823,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which SAP SES contains " + pTextValue + ".";
                     }
                     break;
                 case 43://TxROID_NO
@@ -734,6 +834,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which ROID No equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -742,6 +843,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which ROID No contains " + pTextValue + ".";
                     }
                     break;
                 case 44://TxVENDOR
@@ -752,6 +854,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which VENDOR equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -760,6 +863,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which VENDOR contains " + pTextValue + ".";
                     }
                     break;
                 case 45://TxVENDOR_COFC
@@ -770,6 +874,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which VENDOR CofC equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -778,6 +883,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which VENDOR CofC contains " + pTextValue + ".";
                     }
                     break;
                 case 46://TxVENDOR_MATERIAL_COST
@@ -788,6 +894,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which VENDOR MAT COST equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -796,6 +903,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which VENDOR MAT COST contains " + pTextValue + ".";
                     }
                     break;
                 case 47://TxVENDOR_LABOR_COST
@@ -806,6 +914,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which VENDOR LAB COST equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -814,6 +923,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which VENDOR LAB COST contains " + pTextValue + ".";
                     }
                     break;
                 case 48://TxRR_PO
@@ -824,6 +934,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which RR PO equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -832,6 +943,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which RR PO contains " + pTextValue + ".";
                     }
                     break;
                 case 49://TxPO_REQ
@@ -842,6 +954,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which PO REQ equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -850,6 +963,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which PO REQ contains " + pTextValue + ".";
                     }
                     break;
                 case 50://CbINVOICE_PAID
@@ -858,6 +972,10 @@ namespace RSAF_Forms
                                                  .OrderBy(c => c.MASTER_ID)
                                                  .OrderByDescending(c => c.BAESENT)
                                                  .ToList();
+                    if (pCheckboxValue)
+                        msgLast = "which INVOICE PAID equals to tick.";
+                    else
+                        msgLast = "which INVOICE PAID equals to untick.";
                     break;
                 case 51://TxREMARKS
                     if (pSearchCriteria == "E")
@@ -867,6 +985,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which REMARKS equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -875,6 +994,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which REMARKS contains " + pTextValue + ".";
                     }
                     break;
                 case 52://TxMODULE_TEXT
@@ -885,6 +1005,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which MODULE TEXT equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -893,6 +1014,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which MODULE TEXT contains " + pTextValue + ".";
                     }
                     break;
                 case 53://DtFLEX_DATE
@@ -901,6 +1023,7 @@ namespace RSAF_Forms
                                                 .OrderBy(c => c.MASTER_ID)
                                                 .OrderByDescending(c => c.BAESENT)
                                                 .ToList();
+                    msgLast = "which FLEX DATE equals to " + vDateValue.ToShortDateString() + ".";
                     break;
                 case 54://TxFLEX1
                     if (pSearchCriteria == "E")
@@ -910,6 +1033,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which FLEX1 equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -918,6 +1042,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which FLEX1 contains " + pTextValue + ".";
                     }
                     break;
                 case 55://TxFLEX2
@@ -928,6 +1053,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which FLEX2 equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -936,6 +1062,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which FLEX2 contains " + pTextValue + ".";
                     }
                     break;
                 case 56://TxFLEX3
@@ -946,6 +1073,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which FLEX3 equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -954,6 +1082,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which FLEX3 contains " + pTextValue + ".";
                     }
                     break;
                 case 57://TxFLEX4
@@ -964,6 +1093,7 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which FLEX4 equals to " + pTextValue + ".";
                     }
                     else
                     {
@@ -972,140 +1102,387 @@ namespace RSAF_Forms
                                                     .OrderBy(c => c.MASTER_ID)
                                                     .OrderByDescending(c => c.BAESENT)
                                                     .ToList();
+                        msgLast = "which FLEX4 contains " + pTextValue + ".";
                     }
                     break;
             }
 
             RsafDetailBindingSource.DataSource = query;
-            var numberOfrecords= query.Count;
+            long numberOfrecords = query.Count;
+            string msgFirst;
             if (numberOfrecords == 0)
-                toolStripStatusLabel.Text = "No record found";
+                msgFirst = "Found no record ";
             else
             {
                 if (numberOfrecords == 1)
-                    toolStripStatusLabel.Text = "1 record found";
-                else 
-                    toolStripStatusLabel.Text = query.Count().ToString()+" records found";
+                    msgFirst = "Found 1 record ";
+                else
+                    msgFirst = "Found " + numberOfrecords.ToString() + " records ";
             }
-        }
-
-
-        private void DtDESPDATE_KeyDown(object sender, KeyEventArgs e)
-        {
-            if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
-                DtDESPDATE.CustomFormat = " ";
-            if (e.KeyCode == Keys.Space) 
-                DtDESPDATE.CustomFormat = "dd/MM/yyyy";
-        }
-
-        private void DtDESPDATE_ValueChanged(object sender, EventArgs e)
-        {
-            DtDESPDATE.CustomFormat = "dd/MM/yyyy";
+            toolStripStatusLabel.Text = msgFirst + msgLast;
         }
 
         private void BindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
+            Boolean isChanged = false;
+            foreach (var entry in rsafDbContext.ChangeTracker.Entries<RSAF_DETAIL>())
+                if (entry.State == System.Data.Entity.EntityState.Modified)
+                    isChanged = true;
+
             rsafDbContext.SaveChanges();
+
+            if (isChanged)
+                toolStripStatusLabel.Text = "Saved Changes.";
+            else
+                toolStripStatusLabel.Text = "No changes to be saved.";
+
+        }
+        private void DtDESPDATE_KeyDown(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            DateTime CurrentDate = DateTime.Now;
+            DateTime ReceivedDate = DtRECDATE.CustomFormat == " " ? CurrentDate : DtRECDATE.Value;
+            if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
+            {
+                DtDESPDATE.CustomFormat = " ";
+                detailPO.DESPDATE = null;
+                toolStripStatusLabel.Text = "Edited DESPATCH DATE";
+            }
+            if (e.KeyCode == Keys.Space)
+            {
+                if (detailPO.DESPDATE == null)
+                {
+                    detailPO.DESPDATE = CurrentDate;
+                    DtDESPDATE.Value = CurrentDate;
+                }
+                DtDESPDATE.CustomFormat = "dd/MM/yyyy";
+                toolStripStatusLabel.Text = "Edited DESPATCH DATE";
+            }
+            if (CurrentDate == ReceivedDate)
+                TxELAPSED_TIME.Text = "";
+            else
+                TxELAPSED_TIME.Text = (DtDESPDATE.CustomFormat == " ") ? (CurrentDate - ReceivedDate).Days.ToString() : "";
+        }
+
+        private void DtDESPDATE_ValueChanged(object sender, EventArgs e)
+        {
+            if (TxDETAIL_ID.Text != "")
+            {
+                var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+                if (detailPO.DESPDATE != DtDESPDATE.Value)
+                {
+                    detailPO.DESPDATE = DtDESPDATE.Value;
+                    toolStripStatusLabel.Text = "Edited DESPATCH DATE";
+                }
+            }
+            DtDESPDATE.CustomFormat = "dd/MM/yyyy";
+            TxELAPSED_TIME.Text = "";
         }
 
         private void DtINVOICE_REQUESTED_ValueChanged(object sender, EventArgs e)
         {
+            if (TxDETAIL_ID.Text != "")
+            {
+                var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+                if (detailPO.INVOICE_REQUESTED != DtINVOICE_REQUESTED.Value)
+                {
+                    detailPO.INVOICE_REQUESTED = DtINVOICE_REQUESTED.Value;
+                    toolStripStatusLabel.Text = "Edited INVOICE DATE";
+                }
+            }
             DtINVOICE_REQUESTED.CustomFormat = "dd/MM/yyyy";
         }
 
         private void DtINVOICE_REQUESTED_KeyDown(object sender, KeyEventArgs e)
         {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
             if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
+            {
                 DtINVOICE_REQUESTED.CustomFormat = " ";
+                detailPO.INVOICE_REQUESTED = null;
+                toolStripStatusLabel.Text = "Edited INVOICE DATE";
+            }
             if (e.KeyCode == Keys.Space)
+            {
+                DateTime CurrentDate = DateTime.Now.Date;
+                if (detailPO.INVOICE_REQUESTED == null)
+                {
+                    detailPO.INVOICE_REQUESTED = CurrentDate;
+                    DtINVOICE_REQUESTED.Value = CurrentDate;
+                    toolStripStatusLabel.Text = "Edited INVOICE DATE";
+                }
                 DtINVOICE_REQUESTED.CustomFormat = "dd/MM/yyyy";
+            }
         }
 
         private void DtBAESENT_ValueChanged(object sender, EventArgs e)
         {
+            if (TxDETAIL_ID.Text != "")
+            {
+                var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+                if (detailPO.BAESENT != DtBAESENT.Value)
+                {
+                    detailPO.BAESENT = DtBAESENT.Value;
+                    toolStripStatusLabel.Text = "Edited BAES PO DATE";
+                }
+            }
             DtBAESENT.CustomFormat = "dd/MM/yyyy";
         }
 
         private void DtBAESENT_KeyDown(object sender, KeyEventArgs e)
         {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
             if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
+            {
                 DtBAESENT.CustomFormat = " ";
+                detailPO.BAESENT = null;
+                toolStripStatusLabel.Text = "Edited BAES PO DATE";
+            }
             if (e.KeyCode == Keys.Space)
+            {
+                DateTime CurrentDate = DateTime.Now.Date;
+                if (detailPO.BAESENT == null)
+                {
+                    detailPO.BAESENT = CurrentDate;
+                    DtBAESENT.Value = CurrentDate;
+                    toolStripStatusLabel.Text = "Edited BAES PO DATE";
+                }
                 DtBAESENT.CustomFormat = "dd/MM/yyyy";
+            }
         }
 
         private void DtRECDATE_ValueChanged(object sender, EventArgs e)
         {
             DtRECDATE.CustomFormat = "dd/MM/yyyy";
+
+            if (TxDETAIL_ID.Text != "")
+            {
+                var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+                if (detailPO.RECDATE != DtRECDATE.Value)
+                {
+                    detailPO.RECDATE = DtRECDATE.Value;
+                    toolStripStatusLabel.Text = "Edited RECVD DATE";
+                }
+            }
+
+            DateTime CurrentDate = DateTime.Now;
+            DateTime ReceivedDate = DtRECDATE.CustomFormat == " " ? CurrentDate : DtRECDATE.Value;
+            if (CurrentDate == ReceivedDate)
+                TxELAPSED_TIME.Text = "";
+            else
+                TxELAPSED_TIME.Text = (DtDESPDATE.CustomFormat == " ") ? (CurrentDate - ReceivedDate).Days.ToString() : "";
         }
 
         private void DtRECDATE_KeyDown(object sender, KeyEventArgs e)
         {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            DateTime CurrentDate = DateTime.Now;
             if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
+            {
                 DtRECDATE.CustomFormat = " ";
+                detailPO.RECDATE = null;
+                toolStripStatusLabel.Text = "Edited RECVD DATE";
+            }
             if (e.KeyCode == Keys.Space)
+            {
+                if (detailPO.RECDATE == null)
+                {
+                    detailPO.RECDATE = CurrentDate;
+                    DtRECDATE.Value = CurrentDate;
+                    toolStripStatusLabel.Text = "Edited RECVD DATE";
+                }
                 DtRECDATE.CustomFormat = "dd/MM/yyyy";
+            }
+            DateTime ReceivedDate = DtRECDATE.CustomFormat == " " ? CurrentDate : DtRECDATE.Value;
+            if (CurrentDate == ReceivedDate)
+                TxELAPSED_TIME.Text = "";
+            else
+                TxELAPSED_TIME.Text = (DtDESPDATE.CustomFormat == " ") ? (CurrentDate - ReceivedDate).Days.ToString() : "";
         }
 
         private void DtQUOTE_REF_DATE_ValueChanged(object sender, EventArgs e)
         {
+            if (TxDETAIL_ID.Text != "")
+            {
+                var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+                if (detailPO.QUOTE_REF_DATE != DtQUOTE_REF_DATE.Value)
+                {
+                    detailPO.QUOTE_REF_DATE = DtQUOTE_REF_DATE.Value;
+                    toolStripStatusLabel.Text = "Edited QUOTE DATE";
+                }
+            }
             DtQUOTE_REF_DATE.CustomFormat = "dd/MM/yyyy";
         }
 
         private void DtQUOTE_REF_DATE_KeyDown(object sender, KeyEventArgs e)
         {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
             if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
+            {
                 DtQUOTE_REF_DATE.CustomFormat = " ";
+                detailPO.QUOTE_REF_DATE = null;
+                toolStripStatusLabel.Text = "Edited QUOTE DATE";
+            }
             if (e.KeyCode == Keys.Space)
+            {
+                DateTime CurrentDate = DateTime.Now.Date;
+                if (detailPO.QUOTE_REF_DATE == null)
+                {
+                    detailPO.QUOTE_REF_DATE = CurrentDate;
+                    DtQUOTE_REF_DATE.Value = CurrentDate;
+                    toolStripStatusLabel.Text = "Edited QUOTE DATE";
+                }
                 DtQUOTE_REF_DATE.CustomFormat = "dd/MM/yyyy";
+            }
         }
 
         private void DtCTRT_DATE_ValueChanged(object sender, EventArgs e)
         {
+            if (TxDETAIL_ID.Text != "")
+            {
+                var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+                if (detailPO.CTRT_DATE != DtCTRT_DATE.Value)
+                {
+                    detailPO.CTRT_DATE = DtCTRT_DATE.Value;
+                    toolStripStatusLabel.Text = "Edited CONTRACT DATE";
+                }
+            }
             DtCTRT_DATE.CustomFormat = "dd/MM/yyyy";
         }
 
         private void DtCTRT_DATE_KeyDown(object sender, KeyEventArgs e)
         {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
             if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
+            {
                 DtCTRT_DATE.CustomFormat = " ";
+                detailPO.CTRT_DATE = null;
+                toolStripStatusLabel.Text = "Edited CONTRACT DATE";
+            }
             if (e.KeyCode == Keys.Space)
+            {
+                DateTime CurrentDate = DateTime.Now.Date;
+                if (detailPO.CTRT_DATE == null)
+                {
+                    detailPO.CTRT_DATE = CurrentDate;
+                    DtCTRT_DATE.Value = CurrentDate;
+                    toolStripStatusLabel.Text = "Edited CONTRACT DATE";
+                }
                 DtCTRT_DATE.CustomFormat = "dd/MM/yyyy";
+            }
         }
 
         private void DtPROMISE_ValueChanged(object sender, EventArgs e)
         {
+            if (TxDETAIL_ID.Text != "")
+            {
+                var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+                if (detailPO.PROMISE != DtPROMISE.Value)
+                {
+                    detailPO.PROMISE = DtPROMISE.Value;
+                    toolStripStatusLabel.Text = "Edited PROMISE DATE";
+                }
+            }
             DtPROMISE.CustomFormat = "dd/MM/yyyy";
         }
 
         private void DtPROMISE_KeyDown(object sender, KeyEventArgs e)
         {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
             if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
+            {
                 DtPROMISE.CustomFormat = " ";
+                detailPO.PROMISE = null;
+                toolStripStatusLabel.Text = "Edited PROMISE DATE";
+            }
             if (e.KeyCode == Keys.Space)
+            {
+                DateTime CurrentDate = DateTime.Now.Date;
+                if (detailPO.PROMISE == null)
+                {
+                    detailPO.PROMISE = CurrentDate;
+                    DtPROMISE.Value = CurrentDate;
+                    toolStripStatusLabel.Text = "Edited PROMISE DATE";
+                }
                 DtPROMISE.CustomFormat = "dd/MM/yyyy";
+            }
         }
 
         private void DtFLEX_DATE_ValueChanged(object sender, EventArgs e)
         {
+            if (TxDETAIL_ID.Text != "")
+            {
+                var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+                if (detailPO.FLEX_DATE != DtFLEX_DATE.Value)
+                {
+                    detailPO.FLEX_DATE = DtFLEX_DATE.Value;
+                    toolStripStatusLabel.Text = "Edited FLEX DATE";
+                }
+            }
             DtFLEX_DATE.CustomFormat = "dd/MM/yyyy";
         }
 
         private void DtFLEX_DATE_KeyDown(object sender, KeyEventArgs e)
         {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
             if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
+            {
                 DtFLEX_DATE.CustomFormat = " ";
+                detailPO.FLEX_DATE = null;
+                toolStripStatusLabel.Text = "Edited FLEX DATE";
+            }
             if (e.KeyCode == Keys.Space)
+            {
+                DateTime CurrentDate = DateTime.Now.Date;
+                if (detailPO.FLEX_DATE == null)
+                {
+                    detailPO.FLEX_DATE = CurrentDate;
+                    DtFLEX_DATE.Value = CurrentDate;
+                    toolStripStatusLabel.Text = "Edited FLEX DATE";
+                }
                 DtFLEX_DATE.CustomFormat = "dd/MM/yyyy";
+            }
+        }
+        private void DtPSIDATE_ValueChanged(object sender, EventArgs e)
+        {
+            if (TxDETAIL_ID.Text != "")
+            {
+                var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+                if (detailPO.PSIDATE != DtPSIDATE.Value)
+                {
+                    detailPO.PSIDATE = DtPSIDATE.Value;
+                    toolStripStatusLabel.Text = "Edited DATE";
+                }
+            }
+            DtPSIDATE.CustomFormat = "dd/MM/yyyy";
+        }
+
+        private void DtPSIDATE_KeyDown(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
+            {
+                DtPSIDATE.CustomFormat = " ";
+                detailPO.PSIDATE = null;
+                toolStripStatusLabel.Text = "Edited DATE";
+            }
+            if (e.KeyCode == Keys.Space)
+            {
+                DateTime CurrentDate = DateTime.Now.Date;
+                if (detailPO.PSIDATE == null)
+                {
+                    detailPO.PSIDATE = CurrentDate;
+                    DtPSIDATE.Value = CurrentDate;
+                    toolStripStatusLabel.Text = "Edited DATE";
+                }
+                DtPSIDATE.CustomFormat = "dd/MM/yyyy";
+            }
         }
 
         private void RsafDetailBindingNavigator_RefreshItems(object sender, EventArgs e)
         {
             long value;
             masterId = long.TryParse(TxMASTER_ID.Text, out value) ? value : 0;
-
-            TxELAPSED_TIME.Text = (DtDESPDATE.Value == null) ? (DateTime.Now - DtRECDATE.Value).TotalDays.ToString(): "";
-
             try
             {
                 var master = rsafDbContext.RSAF_MASTER.Where(c => c.MASTER_ID == masterId).ToList();
@@ -1118,12 +1495,79 @@ namespace RSAF_Forms
                     TxBAEPO.Text = x.BAEPO;
                 }
             }
-            catch 
+            catch
             {
-                
+
             }
 
-            if(this.CbARCHIVE.Checked==false)
+            detailId = long.TryParse(TxDETAIL_ID.Text, out value) ? value : 0;
+
+            if (detailId != 0)
+            {
+                RSAF_DETAIL detailPO;
+                DateTime CurrentDate = DateTime.Now;
+                DateTime ReceivedDate = CurrentDate;
+                try
+                {
+                    detailPO = rsafDbContext.RSAF_DETAIL.Find(detailId);
+
+                    ReceivedDate = detailPO.RECDATE == null ? ReceivedDate : detailPO.RECDATE.Value;
+                    if (CurrentDate == ReceivedDate)
+                        TxELAPSED_TIME.Text = "";
+                    else
+                        TxELAPSED_TIME.Text = (detailPO.DESPDATE == null) ? (CurrentDate - ReceivedDate).Days.ToString() : "";
+
+                    if (detailPO.DESPDATE == null)
+                        DtDESPDATE.CustomFormat = " ";
+                    else
+                        DtDESPDATE.CustomFormat = "dd/MM/yyyy";
+
+                    if (detailPO.RECDATE == null)
+                        DtRECDATE.CustomFormat = " ";
+                    else
+                        DtRECDATE.CustomFormat = "dd/MM/yyyy";
+
+                    if (detailPO.BAESENT == null)
+                        DtBAESENT.CustomFormat = " ";
+                    else
+                        DtBAESENT.CustomFormat = "dd/MM/yyyy";
+
+                    if (detailPO.PSIDATE == null)
+                        DtPSIDATE.CustomFormat = " ";
+                    else
+                        DtPSIDATE.CustomFormat = "dd/MM/yyyy";
+
+                    if (detailPO.QUOTE_REF_DATE == null)
+                        DtQUOTE_REF_DATE.CustomFormat = " ";
+                    else
+                        DtQUOTE_REF_DATE.CustomFormat = "dd/MM/yyyy";
+
+                    if (detailPO.INVOICE_REQUESTED == null)
+                        DtINVOICE_REQUESTED.CustomFormat = " ";
+                    else
+                        DtINVOICE_REQUESTED.CustomFormat = "dd/MM/yyyy";
+
+                    if (detailPO.CTRT_DATE == null)
+                        DtCTRT_DATE.CustomFormat = " ";
+                    else
+                        DtCTRT_DATE.CustomFormat = "dd/MM/yyyy";
+
+                    if (detailPO.PROMISE == null)
+                        DtPROMISE.CustomFormat = " ";
+                    else
+                        DtPROMISE.CustomFormat = "dd/MM/yyyy";
+
+                    if (detailPO.FLEX_DATE == null)
+                        DtFLEX_DATE.CustomFormat = " ";
+                    else
+                        DtFLEX_DATE.CustomFormat = "dd/MM/yyyy";
+
+
+                }
+                catch { }
+            }
+
+            if (this.CbARCHIVE.Checked == false)
             {
                 TxPART_NO.ReadOnly = false;
                 TxOONUM.ReadOnly = false;
@@ -1242,18 +1686,6 @@ namespace RSAF_Forms
             rsafDbContext.Dispose();
         }
 
-        private void DtPSIDATE_ValueChanged(object sender, EventArgs e)
-        {
-            DtPSIDATE.CustomFormat = "dd/MM/yyyy";
-        }
-
-        private void DtPSIDATE_KeyDown(object sender, KeyEventArgs e)
-        {
-            if ((e.KeyCode == Keys.Back) || (e.KeyCode == Keys.Delete))
-                DtPSIDATE.CustomFormat = " ";
-            if (e.KeyCode == Keys.Space)
-                DtPSIDATE.CustomFormat = "dd/MM/yyyy";
-        }
 
         private void LbBAEPART_DoubleClick(object sender, EventArgs e)
         {
@@ -1775,6 +2207,12 @@ namespace RSAF_Forms
                 DtPSIDATE.Enabled = false;
                 TxQTYREC.ReadOnly = true;
             }
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (CbARCHIVE.Checked != detailPO.ARCHIVE)
+            {
+                detailPO.ARCHIVE = CbARCHIVE.Checked;
+                toolStripStatusLabel.Text = "Edited ARCHIVE";
+            }
         }
 
         private void BtRI_Click(object sender, EventArgs e)
@@ -1782,6 +2220,571 @@ namespace RSAF_Forms
             POReportForm poReportForm = new POReportForm();
             poReportForm.ShowDialog();
 
+        }
+
+        private void TxSAP_SES_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+            else
+                toolStripStatusLabel.Text = "Edited SAP SES";
+        }
+
+        private void TxBAEQTY_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+            else
+                toolStripStatusLabel.Text = "Edited BAES QTY";
+        }
+
+        private void TxEX_ENGINE_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+            else
+                toolStripStatusLabel.Text = "Edited EX ENGINE";
+        }
+
+        private void TxHOURS_NEW_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+            else
+                toolStripStatusLabel.Text = "Edited HOURS NEW";
+        }
+
+        private void TxENG_MARK_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+            else
+                toolStripStatusLabel.Text = "Edited ENG MK";
+        }
+
+        private void TxSALES_DOCUMENT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+            else
+                toolStripStatusLabel.Text = "Edited SALES DOC No";
+        }
+
+
+        private void TxQTYSCRP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+            else
+                toolStripStatusLabel.Text = "Edited SCRAP";
+        }
+
+        private void TxQTYREC_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+            else
+                toolStripStatusLabel.Text = "Edited RECVD QTY";
+        }
+
+        private void TxRR_PO_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+            else
+                toolStripStatusLabel.Text = "Edited RR PO";
+        }
+
+        private void TxPO_REQ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+            else
+                toolStripStatusLabel.Text = "Edited PO REQ";
+        }
+
+        private void TxSAP_SES_KeyUp(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (TxSAP_SES.Text == String.Empty && detailPO.SAP_SES != null)
+                detailPO.SAP_SES = null;
+            else
+                try
+                {
+                    detailPO.SAP_SES = long.Parse(TxSAP_SES.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxSAP_SES.Text = detailPO.SAP_SES.ToString();
+                    toolStripStatusLabel.Text = "Value Overflow for SAP SES. Backed to old value.";
+                }
+        }
+
+        private void TxBAEQTY_KeyUp(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (TxBAEQTY.Text == String.Empty)
+                detailPO.BAEQTY = null;
+            else
+                try
+                {
+                    detailPO.BAEQTY = short.Parse(TxBAEQTY.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxBAEQTY.Text = detailPO.BAEQTY.ToString();
+                    toolStripStatusLabel.Text = "Value Overflow for BAES QTY. Backed to old value.";
+                }
+        }
+
+        private void TxQTYREC_KeyUp(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (TxQTYREC.Text == String.Empty)
+                detailPO.QTYREC = null;
+            else
+                try
+                {
+                    detailPO.QTYREC = short.Parse(TxQTYREC.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxQTYREC.Text = detailPO.QTYREC.ToString();
+                    toolStripStatusLabel.Text = "Value Overflow for RECVD QTY. Backed to old value.";
+                }
+        }
+
+        private void TxQTYSCRP_KeyUp(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (TxQTYSCRP.Text == String.Empty)
+                detailPO.QTYSCRP = null;
+            else
+                try
+                {
+                    detailPO.QTYSCRP = short.Parse(TxQTYSCRP.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxQTYSCRP.Text = detailPO.QTYSCRP.ToString();
+                    toolStripStatusLabel.Text = "Value Overflow for SCRAP. Backed to old value.";
+                }
+        }
+
+        private void TxENG_MARK_KeyUp(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (TxENG_MARK.Text == String.Empty)
+                detailPO.ENG_MARK = null;
+            else
+                try
+                {
+                    detailPO.ENG_MARK = int.Parse(TxENG_MARK.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxENG_MARK.Text = detailPO.ENG_MARK.ToString();
+                    toolStripStatusLabel.Text = "Value Overflow for ENG MK. Backed to old value.";
+                }
+        }
+
+        private void TxHOURS_NEW_KeyUp(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (TxHOURS_NEW.Text == String.Empty)
+                detailPO.HOURS_NEW = null;
+            else
+                try
+                {
+                    detailPO.HOURS_NEW = int.Parse(TxHOURS_NEW.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxHOURS_NEW.Text = detailPO.HOURS_NEW.ToString();
+                    toolStripStatusLabel.Text = "Value Overflow for HOURS NEW. Backed to old value.";
+                }
+        }
+
+        private void TxEX_ENGINE_KeyUp(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (TxEX_ENGINE.Text == String.Empty)
+                detailPO.EX_ENGINE = null;
+            else
+                try
+                {
+                    detailPO.EX_ENGINE = int.Parse(TxEX_ENGINE.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxEX_ENGINE.Text = detailPO.EX_ENGINE.ToString();
+                    toolStripStatusLabel.Text = "Value Overflow for EX ENGINE. Backed to old value.";
+                }
+        }
+
+        private void TxSALES_DOCUMENT_KeyUp(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (TxSALES_DOCUMENT.Text == String.Empty)
+                detailPO.SALES_DOCUMENT = null;
+            else
+                try
+                {
+                    detailPO.SALES_DOCUMENT = long.Parse(TxSALES_DOCUMENT.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxSALES_DOCUMENT.Text = detailPO.SALES_DOCUMENT.ToString();
+                    toolStripStatusLabel.Text = "Value Overflow for SALES DOC No. Backed to old value.";
+                }
+        }
+
+        private void TxPO_REQ_KeyUp(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (TxPO_REQ.Text == String.Empty)
+                detailPO.PO_REQ = null;
+            else
+                try
+                {
+                    detailPO.PO_REQ = long.Parse(TxPO_REQ.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxPO_REQ.Text = detailPO.PO_REQ.ToString();
+                    toolStripStatusLabel.Text = "Value Overflow for PO REQ. Backed to old value.";
+                }
+        }
+
+        private void TxRR_PO_KeyUp(object sender, KeyEventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (TxRR_PO.Text == String.Empty)
+                detailPO.RR_PO = null;
+            else
+                try
+                {
+                    detailPO.RR_PO = long.Parse(TxRR_PO.Text);
+                }
+                catch (Exception OverflowException)
+                {
+                    TxRR_PO.Text = detailPO.RR_PO.ToString();
+                    toolStripStatusLabel.Text = "Value Overflow for RR PO. Backed to old value.";
+                }
+        }
+
+        private void POSearchEditItemForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var change = false;
+            var entries = rsafDbContext.ChangeTracker.Entries();
+            foreach (var entry in entries)
+                if (entry.State != System.Data.Entity.EntityState.Unchanged && entry.OriginalValues != entry.CurrentValues)
+                {
+                    //MessageBox.Show(entry.Entity.ToString()+":"+entry.State.ToString());
+                    change = true;
+                }
+                    
+
+
+            if (change)
+            {
+                toolStripStatusLabel.Text = "The Form Closing";
+                DialogResult dialogResult = MessageBox.Show("Would you like to save changings before leaving?", "Save Changes", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                    rsafDbContext.SaveChanges();
+            }
+
+        }
+
+
+        private void TxPART_NO_KeyUp(object sender, KeyEventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited RECVD P/N";
+        }
+
+        private void TxOONUM_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited SAP NWA";
+        }
+
+        private void TxOUTPART_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited P/N EX REPAIR";
+        }
+
+        private void TxDESPTOBA_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited R.R. R/NOTE";
+        }
+
+        private void TxAWB_DETAILS_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited AWB DETAILS";
+        }
+
+        private void TxRFR_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited R.F.R";
+        }
+
+        private void TxVENDOR_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited VENDOR";
+        }
+
+        private void TxVENDOR_COFC_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited VENDOR CofC";
+        }
+
+        private void TxREMARKS_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited REMARKS";
+        }
+
+        private void TxFLEX1_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited FLEX1";
+        }
+
+        private void TxFLEX3_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited FLEX3";
+        }
+
+        private void TxFLEX2_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited FLEX2";
+        }
+
+        private void TxFLEX4_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited FLEX4";
+        }
+
+        private void TxBAESER_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited BAES S/N";
+        }
+
+        private void TxPOITEM_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited ITEM No";
+        }
+
+        private void TxSERIAL_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited RECVD S/N";
+        }
+
+        private void TxPSIREF_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited R.I. REF";
+        }
+
+        private void TxQUOTE_REF_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited QUOTE No";
+        }
+
+        private void TxHOURS_REP_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited HOURS REP";
+        }
+
+        private void TxINVOICE_NO_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited INVOICE No";
+        }
+
+        private void TxMDR_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited MDR";
+        }
+
+        private void TxQUALITY_NO_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited QUALITY No";
+        }
+
+
+        private void TxMODULE_TEXT_KeyUp(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Edited MODULE TEXT";
+        }
+
+        private void CbWARR_CheckedChanged(object sender, EventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (CbWARR.Checked != detailPO.WARR)
+            {
+                detailPO.WARR = CbWARR.Checked;
+                toolStripStatusLabel.Text = "Edited WARRANTY";
+            }
+        }
+
+        private void CbPOIC_CheckedChanged(object sender, EventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (CbPOIC.Checked != detailPO.POIC)
+            {
+                detailPO.POIC = CbPOIC.Checked;
+                toolStripStatusLabel.Text = "Edited PO ITEM CLOSED";
+            }
+        }
+
+        private void CbINVOICE_PAID_CheckedChanged(object sender, EventArgs e)
+        {
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+            if (CbINVOICE_PAID.Checked != detailPO.INVOICE_PAID)
+            {
+                detailPO.INVOICE_PAID = CbINVOICE_PAID.Checked;
+                toolStripStatusLabel.Text = "Edited INVOICE PAID";
+            }
+        }
+
+        private void TxRCP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
+            else
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                    e.Handled = true;
+        }
+
+        private void TxRCP_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool isDecimal;
+            decimal result;
+
+            isDecimal = decimal.TryParse(TxRCP.Text, out result);
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+
+            if (result != detailPO.RCP)
+            {
+                detailPO.RCP = result;
+                toolStripStatusLabel.Text = "Edited REPAIR COST (£)";
+            }
+        }
+
+        private void TxEURO_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
+            else
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                e.Handled = true;
+        }
+
+        private void TxEURO_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool isDecimal;
+            decimal result;
+
+            isDecimal = decimal.TryParse(TxEURO.Text, out result);
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+
+            if (result != detailPO.EURO)
+            {
+                detailPO.EURO = result;
+                toolStripStatusLabel.Text = "Edited EURO";
+            }
+        }
+
+        private void TxACC_STG_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
+            else
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                e.Handled = true;
+        }
+
+        private void TxACC_STG_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool isDecimal;
+            decimal result;
+
+            isDecimal = decimal.TryParse(TxACC_STG.Text, out result);
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+
+            if (result != detailPO.ACC_STG)
+            {
+                detailPO.ACC_STG = result;
+                toolStripStatusLabel.Text = "Edited P or A STG";
+            }
+        }
+
+        private void TxPAEURO_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
+            else
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                e.Handled = true;
+        }
+
+        private void TxPAEURO_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool isDecimal;
+            decimal result;
+
+            isDecimal = decimal.TryParse(TxPAEURO.Text, out result);
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+
+            if (result != detailPO.PAEURO)
+            {
+                detailPO.PAEURO = result;
+                toolStripStatusLabel.Text = "Edited P or A EURO";
+            }
+        }
+
+        private void TxVENDOR_MATERIAL_COST_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
+            else
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                e.Handled = true;
+        }
+
+        private void TxVENDOR_MATERIAL_COST_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool isDecimal;
+            decimal result;
+
+            isDecimal = decimal.TryParse(TxVENDOR_MATERIAL_COST.Text, out result);
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+
+            if (result != detailPO.VENDOR_MATERIAL_COST)
+            {
+                detailPO.VENDOR_MATERIAL_COST = result;
+                toolStripStatusLabel.Text = "Edited VENDOR MAT COST";
+            }
+        }
+
+        private void TxVENDOR_LABOR_COST_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
+            else
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                e.Handled = true;
+        }
+
+        private void TxVENDOR_LABOR_COST_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool isDecimal;
+            decimal result;
+
+            isDecimal = decimal.TryParse(TxVENDOR_LABOR_COST.Text, out result);
+            var detailPO = rsafDbContext.RSAF_DETAIL.Find(long.Parse(TxDETAIL_ID.Text));
+
+            if (result != detailPO.VENDOR_LABOR_COST)
+            {
+                detailPO.VENDOR_LABOR_COST = result;
+                toolStripStatusLabel.Text = "Edited VENDOR LAB COST";
+            }
         }
     }
 }
